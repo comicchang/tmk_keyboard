@@ -21,7 +21,7 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KEYMAP_HHKB(
         ESC, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, BSLS, GRV, \
         TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC,RBRC,BSPC, \
-        CAPS,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,     ENT,  \
+        CAPS,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN, FN7,     ENT,  \
         LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,     RSFT,FN1,  \
         FN6 ,LALT,LGUI,          FN0,                     RALT,RGUI,CAPS,RCTL),
 
@@ -66,6 +66,25 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,TRNS,      \
         TRNS,TRNS,TRNS,          BTN1,                    TRNS,TRNS,TRNS,TRNS),
 
+    /* Overlay 3: PASSWORD
+     * ,-----------------------------------------------------------.
+     * |CLR|PW1|PW2|PW3|   |   |   |   |   |   |   |   |   |   |   |
+     * |-----------------------------------------------------------|
+     * |     |   |   |   |   |   |   |   |   |   |   |   |   |     |
+     * |-----------------------------------------------------------|
+     * |      |   |   |   |   |   |   |   |   |   |   |   |        |
+     * |-----------------------------------------------------------|
+     * |        |   |   |   |   |   |   |   |   |   |   |     |    |
+     * |-----------------------------------------------------------|
+     * |    |    |    |                        |    |    |    |    |
+     * `-----------------------------------------------------------'
+     */
+    KEYMAP_HHKB(
+        FN20,FN21,FN22,FN23,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,      \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,      \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,TRNS,      \
+        TRNS,TRNS,TRNS,          TRNS,                    TRNS,TRNS,TRNS,TRNS),
     /* Overlay X: xxxxxx
      * ,-----------------------------------------------------------.
      * |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
@@ -89,6 +108,13 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 };
 
+enum macro_id {
+    CLEAR,
+    PASSWORD1,
+    PASSWORD2,
+    PASSWORD3,
+};
+
 /*
  * Fn action definition
  */
@@ -100,4 +126,29 @@ const uint16_t PROGMEM fn_actions[] = {
     [4] = ACTION_MODS_KEY(MOD_LALT|MOD_LGUI, KC_L),                         // LaunchCenter
     [5] = ACTION_MODS_TAP_KEY(MOD_LCTL|MOD_LSFT|MOD_LALT|MOD_LGUI, KC_F19), // MAGIC KEY
     [6] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_ESC),                            // MAGIC KEY
+    // ' key = password layer
+    [7] = ACTION_LAYER_TAP_KEY(3, KC_QUOT),                                // SPACE LAYER
+    [20] = ACTION_MACRO(CLEAR),
+    [21] = ACTION_MACRO(PASSWORD1),
+    [22] = ACTION_MACRO(PASSWORD2),
+    [23] = ACTION_MACRO(PASSWORD3),
 };
+
+
+/*
+ * Macro definition
+ */
+#include "keymap_passwords.h"
+const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
+{
+    if (record->event.pressed) {
+        switch (id) {
+            case CLEAR: return MACRO_CLEAR;
+            case PASSWORD1: return MACRO_PASSWORD1;
+            case PASSWORD2: return MACRO_PASSWORD2;
+            case PASSWORD3: return MACRO_PASSWORD3;
+        }
+    }
+    return MACRO_NONE;
+}
+
