@@ -15,18 +15,37 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |-----------------------------------------------------------|
      * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|Shift| FN1|
      * |-----------------------------------------------------------|
-     * |FN6 |Alt |Cmd |      Space             |Alt |Gui |Caps|Ctrl|
+     * |Ctrl|Alt |Cmd |      SpaceFN           |Alt |Gui |Caps|Ctrl|
      * `-----------------------------------------------------------'
      */
     KEYMAP_HHKB(
         FN8, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, BSLS, GRV, \
         TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC,RBRC,BSPC, \
-        CAPS,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,FN10,     ENT,  \
+        CAPS,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,     ENT,  \
         LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,     RSFT,FN1,  \
         LCTL,LALT,LGUI,          FN0,                     RALT,RGUI,CAPS,RCTL),
 
+    /* Overlay 1: Default Keyboard Layout
+     * ,-----------------------------------------------------------.
+     * |ESC|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|  \|  `|
+     * |-----------------------------------------------------------|
+     * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|  Bsp|
+     * |-----------------------------------------------------------|
+     * |CAPS  |  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  '|Return  |
+     * |-----------------------------------------------------------|
+     * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|Shift| FN1|
+     * |-----------------------------------------------------------|
+     * |Ctrl|Alt |Cmd |      Space             |Alt |Gui |Caps|Ctrl|
+     * `-----------------------------------------------------------'
+     */
+    KEYMAP_HHKB(
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,      \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,      \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,FN1,       \
+        TRNS,TRNS,TRNS,          SPC,                     TRNS,TRNS,TRNS,TRNS),
 
-    /* Overlay 1: SpaceFN
+    /* Overlay 2: SpaceFN
      * ,-----------------------------------------------------------.
      * |`  | F1| F2| F3| F4| F5| F6| F7| F8| F9|F10|F11|F12|Bsp|Bsp|
      * |-----------------------------------------------------------|
@@ -46,13 +65,13 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         TRNS,TRNS,TRNS,TRNS,TRNS,SPC, GRV, FN2, TRNS,TRNS,TRNS,     TRNS,TRNS, \
         TRNS,TRNS,TRNS,          TRNS,                    TRNS,TRNS,TRNS,TRNS),
 
-    /* Overlay 2: MouseKey
+    /* Overlay 3: MouseKey
      * ,-----------------------------------------------------------.
-     * |   |F14|F15|FN3|FN4|   |   |PRV|PLY|NXT|Mut|VoD|VlU|   |   |
+     * |CLR|F14|F15|FN3|FN4|   |   |PRV|PLY|NXT|Mut|VoD|VlU|   |   |
      * |-----------------------------------------------------------|
      * |     |Mb2|MUp|Mb1|WUp|   |   |   | Up|   |   |   |   |     |
      * |-----------------------------------------------------------|
-     * |      |MLf|MDn|MDn|WDn|   |   |Lef|Dow|Rig|   |   |        |
+     * |      |MLf|MDn|MDn|WDn|   |   |Lef|Dow|Rig|   |FN10|        |
      * |-----------------------------------------------------------|
      * |        |   |   |   |   |   |   |   |   |   |   |     |    |
      * |-----------------------------------------------------------|
@@ -60,35 +79,15 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------'
      */
     KEYMAP_HHKB(
-        TRNS,F14, F15, FN3, FN4, TRNS,TRNS,MPRV,MPLY,MNXT,MUTE,VOLD,VOLU,TRNS,TRNS, \
+        FN30,F14, F15, FN3, FN4, TRNS,TRNS,MPRV,MPLY,MNXT,MUTE,VOLD,VOLU,TRNS,TRNS, \
         TRNS,BTN2,MS_U,BTN1,WH_U,TRNS,TRNS,TRNS,UP,  TRNS,TRNS,TRNS,TRNS,TRNS,      \
-        TRNS,MS_L,MS_D,MS_R,WH_D,TRNS,TRNS,LEFT,DOWN,RGHT,TRNS,TRNS,     TRNS,      \
+        TRNS,MS_L,MS_D,MS_R,WH_D,TRNS,TRNS,LEFT,DOWN,RGHT,TRNS,FN20,     TRNS,      \
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,TRNS,      \
         TRNS,TRNS,TRNS,          BTN1,                    TRNS,TRNS,TRNS,TRNS),
 
-    /* Overlay 3: PASSWORD
-     * ,-----------------------------------------------------------.
-     * |CLR|   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-     * |-----------------------------------------------------------|
-     * |     |   |   |   |   |   |   |   |   |   |   |   |   |     |
-     * |-----------------------------------------------------------|
-     * |      |   |   |   |   |   |   |  J|   |   |   |   |        |
-     * |-----------------------------------------------------------|
-     * |        |   |   |   |   |   |   |   |   |   |   |     |    |
-     * |-----------------------------------------------------------|
-     * |    |    |    |                        |    |    |    |    |
-     * `-----------------------------------------------------------'
-     */
-    KEYMAP_HHKB(
-        FN20,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,      \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,FN11,TRNS,TRNS,TRNS,TRNS,     TRNS,      \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,TRNS,      \
-        TRNS,TRNS,TRNS,          TRNS,                    TRNS,TRNS,TRNS,TRNS),
-
     /* Overlay 4: PASSWORD
      * ,-----------------------------------------------------------.
-     * |   |PW1|PW2|PW3|   |   |   |   |   |   |   |   |   |   |   |
+     * |EXT|CLR|PW1|PW2|PW3|   |   |   |   |   |   |   |   |   |   |
      * |-----------------------------------------------------------|
      * |     |   |   |   |   |   |   |   |   |   |   |   |   |     |
      * |-----------------------------------------------------------|
@@ -100,11 +99,12 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------'
      */
     KEYMAP_HHKB(
-        TRNS,FN21,FN22,FN23,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, \
+        FN21,FN22,FN23,FN24,FN25,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, \
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,      \
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,      \
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,TRNS,      \
         TRNS,TRNS,TRNS,          TRNS,                    TRNS,TRNS,TRNS,TRNS),
+
 
     /* Overlay X: xxxxxx
      * ,-----------------------------------------------------------.
@@ -144,25 +144,31 @@ enum macro_id {
  * Fn action definition
  */
 const uint16_t PROGMEM fn_actions[] = {
-    [0] = ACTION_LAYER_TAP_KEY(1, KC_SPACE),                                // SPACE LAYER
-    [1] = ACTION_LAYER_MOMENTARY(2),                                        // MOUSE LAYER
+    [0] = ACTION_LAYER_TAP_KEY(2, KC_SPACE),                                // SPACE LAYER
+    [1] = ACTION_LAYER_MOMENTARY(3),                                        // MOUSE LAYER
     [2] = ACTION_MODS_KEY(MOD_LSFT, KC_GRV),                                // tilde
 
     // Media keys in mousekey layer
     [3] = ACTION_MODS_KEY(MOD_LCTL, KC_UP),                                 // Mission Control
     [4] = ACTION_MODS_KEY(MOD_LALT|MOD_LGUI, KC_L),                         // LaunchCenter
-    //[5] = ACTION_MODS_TAP_KEY(MOD_LCTL|MOD_LSFT|MOD_LALT|MOD_LGUI, KC_F19), // MAGIC KEY
+
+    //[5] = ACTION_MODS_TAP_KEY(MOD_LCTL|MOD_LSFT|MOD_LALT|MOD_LGUI, KC_F19), // Soft MAGIC KEY
     //[6] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_ESC),                            // click LCTL without other key = ESC
     //[7] = ACTION_FUNCTION_TAP(DOUBLE_CTRL),
-    [8] = ACTION_FUNCTION (TRICKY_ESC),
-    // ' + J = password layer
-    [10] = ACTION_LAYER_TAP_KEY(3, KC_QUOT),                                // SPACE LAYER
-    [11] = ACTION_LAYER_TAP_KEY(4, KC_J),                                // SPACE LAYER
 
-    [20] = ACTION_MACRO(CLEAR),
-    [21] = ACTION_MACRO(PASSWORD1),
-    [22] = ACTION_MACRO(PASSWORD2),
-    [23] = ACTION_MACRO(PASSWORD3),
+    // Shift + ESC = ~
+    [8] = ACTION_FUNCTION (TRICKY_ESC),
+
+    // FN + ' = password layer
+    [20] = ACTION_LAYER_INVERT(4,ON_BOTH),
+    [21] = ACTION_LAYER_OFF(4,ON_PRESS),
+    [22] = ACTION_MACRO(CLEAR),
+    [23] = ACTION_MACRO(PASSWORD1),
+    [24] = ACTION_MACRO(PASSWORD2),
+    [25] = ACTION_MACRO(PASSWORD3),
+
+    // FN + ESC = Toggle SpaceFN off (or game mode)
+    [30] = ACTION_LAYER_INVERT(1, ON_PRESS)
 };
 
 
