@@ -71,7 +71,7 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |-----------------------------------------------------------|
      * |     |Mb2|MUp|Mb1|WUp|   |   |   | Up|   |   |   |   |     |
      * |-----------------------------------------------------------|
-     * |      |MLf|MDn|MDn|WDn|   |   |Lef|Dow|Rig|   |FN10|        |
+     * |      |MLf|MDn|MDn|WDn|   |   |Lef|Dow|Rig|   |F20|        |
      * |-----------------------------------------------------------|
      * |        |   |   |   |   |   |   |   |   |   |   |     |    |
      * |-----------------------------------------------------------|
@@ -99,11 +99,11 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------'
      */
     KEYMAP_HHKB(
-        FN21,FN22,FN23,FN24,FN25,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,      \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,      \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,TRNS,      \
-        TRNS,TRNS,TRNS,          TRNS,                    TRNS,TRNS,TRNS,TRNS),
+        FN21,FN22,FN23,FN24,FN25,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21, \
+        FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,      \
+        FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,TRNS,     FN21,      \
+        FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,     FN21,TRNS,      \
+        FN21,FN21,FN21,          FN21,                    FN21,FN21,FN21,FN21),
 
 
     /* Overlay X: xxxxxx
