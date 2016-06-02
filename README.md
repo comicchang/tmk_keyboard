@@ -7,6 +7,9 @@ Source code is available here: <http://github.com/tmk/tmk_keyboard>
 
 Updates
 -------
+#### 2016/02/10
+core: flabbergast's Chibios protocol was merged from <https://github.com/flabbergast/tmk_keyboard/tree/chibios> (@72b1668). See [tmk_core/protocol/chibios/README.md](tmk_core/protocol/chibios/README.md). Chibios protocol supports Cortex-M such as STM32 and Kinetis.
+
 #### 2015/04/22
 Core library was separated to other branch `core`. <https://github.com/tmk/tmk_keyboard/tree/core>
 
@@ -71,7 +74,7 @@ You can find some keyboard specific projects under `converter` and `keyboard` di
 * [Lightpad](keyboard/lightpad)             - Korean custom keypad
 * [ghost_squid](keyboard/ghost_squid/)      - [The Ghost Squid][ghost_squid] controller for [Cooler Master QuickFire XT][cmxt]
 
-### Extenal projects using tmk_keyboard
+### External projects using tmk_keyboard
 * [ErgoDox_cub-uanic][cub-uanic]            - Split Ergonomic Keyboard [ErgoDox][ergodox_org]
 * [mcdox][mcdox_tmk]                        - [mcdox][mcdox]
 
@@ -241,4 +244,4 @@ Coding Style
 
 Other Keyboard Firmware Projects
 ------------------
-You can learn a lot about keyboard firmware from these. See [Other Projects](https://github.com/tmk/tmk_keyboard/wiki/Other-Protjects) other than TMK.
+You can learn a lot about keyboard firmware from these. See [Other Projects](https://github.com/tmk/tmk_keyboard/wiki/Other-Projects) other than TMK.
