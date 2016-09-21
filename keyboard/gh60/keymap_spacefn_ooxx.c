@@ -7,124 +7,124 @@
 const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Overlay 1: Default Keyboard Layout
      * ,-----------------------------------------------------------.
-     * |ESC|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|  \|  `|
+     * |ESC|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|Backspc|
      * |-----------------------------------------------------------|
-     * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|  Bsp|
+     * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|    \|
      * |-----------------------------------------------------------|
      * |CAPS  |  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  '|Return  |
      * |-----------------------------------------------------------|
-     * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|Shift| FN1|
+     * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|Shift     |
      * |-----------------------------------------------------------|
-     * |Ctrl|Alt |Cmd |      Space             |Alt |Gui |Caps|Ctrl|
+     * |Ctrl|Alt |Cmd |      Space             |Gui |Alt |Ctrl|FN1 |
      * `-----------------------------------------------------------'
      */
-    KEYMAP_HHKB(
-        FN8, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, BSLS, GRV, \
-        TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC,RBRC,BSPC, \
+    KEYMAP_ANSI(
+        FN8, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, BSPC, \
+        TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC,RBRC,BSLS, \
         CAPS,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,     ENT,  \
-        LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,     RSFT,FN1,  \
-        LCTL,LALT,LGUI,          SPC,                     RALT,RGUI,CAPS,RCTL),
+        LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,     RSFT,      \
+        LCTL,LALT,LGUI,          SPC,                     RGUI,RALT,RCTL,FN1),
 
     /* Keymap 0: Default Layer
      * ,-----------------------------------------------------------.
-     * |FN8|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|  \|  `|
+     * |FN8|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|Backspc|
      * |-----------------------------------------------------------|
-     * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|  Bsp|
+     * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|    \|
      * |-----------------------------------------------------------|
      * |CAPS  |  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  '|Return  |
      * |-----------------------------------------------------------|
-     * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|Shift| FN1|
+     * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|Shift     |
      * |-----------------------------------------------------------|
-     * |Ctrl|Alt |Cmd |      SpaceFN           |Alt |Gui |Caps|Ctrl|
+     * |Ctrl|Alt |Cmd |      SpaceFN           |Gui |Alt |Ctrl|FN1 |
      * `-----------------------------------------------------------'
      */
-    KEYMAP_HHKB(
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,      \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,      \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,TRNS,      \
+    KEYMAP_ANSI(
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS, \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,      \
         TRNS,TRNS,TRNS,          FN0,                     TRNS,TRNS,TRNS,TRNS),
 
     /* Overlay 2: SpaceFN
      * ,-----------------------------------------------------------.
-     * |`  | F1| F2| F3| F4| F5| F6| F7| F8| F9|F10|F11|F12|Bsp|Bsp|
+     * |`  | F1| F2| F3| F4| F5| F6| F7| F8| F9|F10|F11|F12|Bsp    |
      * |-----------------------------------------------------------|
      * |     |   |PgU|   |   |   |   |   |   |Psc|Slk|Pau|Ins  |Del|
      * |-----------------------------------------------------------|
      * |TRNS  |Hom|PgD|End|   |   |Lef|Dow|Up |Rig|   |   |Enter   |
      * |-----------------------------------------------------------|
-     * |        |   |   |   |   |Spc|`  |~  |   |   |   |     |    |
+     * |        |   |   |   |   |Spc|`  |~  |   |   |   |          |
      * |-----------------------------------------------------------|
      * |    |    |    |                        |    |    |    |    |
      * `-----------------------------------------------------------'
      */
-    KEYMAP_HHKB(
-        GRV, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, BSPC,BSPC, \
-        TRNS,TRNS,PGUP,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,PSCR,SLCK,PAUS,INS, DEL,  \
+    KEYMAP_ANSI(
+        GRV, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, DEL,  \
+        TRNS,TRNS,PGUP,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,PSCR,SLCK,PAUS,INS, BSPC,  \
         TRNS,HOME,PGDN,END, TRNS,TRNS,LEFT,DOWN,UP,  RGHT,TRNS,TRNS,     PENT, \
-        TRNS,TRNS,TRNS,TRNS,TRNS,SPC, GRV, FN2, TRNS,TRNS,TRNS,     TRNS,TRNS, \
+        TRNS,TRNS,TRNS,TRNS,TRNS,SPC, GRV, FN2, TRNS,TRNS,TRNS,     TRNS,      \
         TRNS,TRNS,TRNS,          TRNS,                    TRNS,TRNS,TRNS,TRNS),
 
     /* Overlay 3: MouseKey
      * ,-----------------------------------------------------------.
-     * |CLR|F14|F15|FN3|FN4|   |   |PRV|PLY|NXT|Mut|VoD|VlU|   |   |
+     * |CLR|F14|F15|FN3|FN4|   |   |PRV|PLY|NXT|Mut|VoD|VlU|       |
      * |-----------------------------------------------------------|
      * |     |Mb2|MUp|Mb1|WUp|   |   |   | Up|   |   |   |   |     |
      * |-----------------------------------------------------------|
      * |      |MLf|MDn|MDn|WDn|   |   |Lef|Dow|Rig|   |F20|        |
      * |-----------------------------------------------------------|
-     * |        |   |   |   |   |   |   |   |   |   |   |     |    |
+     * |        |   |   |   |   |   |   |   |   |   |   |          |
      * |-----------------------------------------------------------|
      * |    |    |    |         Mb1            |    |    |    |    |
      * `-----------------------------------------------------------'
      */
-    KEYMAP_HHKB(
-        FN30,F14, F15, FN3, FN4, TRNS,TRNS,MPRV,MPLY,MNXT,MUTE,VOLD,VOLU,TRNS,TRNS, \
+    KEYMAP_ANSI(
+        FN30,F14, F15, FN3, FN4, TRNS,TRNS,MPRV,MPLY,MNXT,MUTE,VOLD,VOLU,TRNS,      \
         TRNS,BTN2,MS_U,BTN1,WH_U,TRNS,TRNS,TRNS,UP,  TRNS,TRNS,TRNS,TRNS,TRNS,      \
         TRNS,MS_L,MS_D,MS_R,WH_D,TRNS,TRNS,LEFT,DOWN,RGHT,TRNS,FN20,     TRNS,      \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,TRNS,      \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,          TRNS,      \
         TRNS,TRNS,TRNS,          BTN1,                    TRNS,TRNS,TRNS,TRNS),
 
     /* Overlay 4: PASSWORD
      * ,-----------------------------------------------------------.
-     * |EXT|CLR|PW1|PW2|PW3|   |   |   |   |   |   |   |   |   |   |
+     * |EXT|CLR|PW1|PW2|PW3|   |   |   |   |   |   |   |   |       |
      * |-----------------------------------------------------------|
      * |     |   |   |   |   |   |   |   |   |   |   |   |   |     |
      * |-----------------------------------------------------------|
      * |      |   |   |   |   |   |   |   |   |   |   |   |        |
      * |-----------------------------------------------------------|
-     * |        |   |   |   |   |   |   |   |   |   |   |     |    |
+     * |        |   |   |   |   |   |   |   |   |   |   |          |
      * |-----------------------------------------------------------|
      * |    |    |    |                        |    |    |    |    |
      * `-----------------------------------------------------------'
      */
-    KEYMAP_HHKB(
-        FN21,FN22,FN23,FN24,FN25,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21, \
+    KEYMAP_ANSI(
+        FN21,FN22,FN23,FN24,FN25,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,      \
         FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,      \
         FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,TRNS,     FN21,      \
-        FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,     FN21,TRNS,      \
-        FN21,FN21,FN21,          FN21,                    FN21,FN21,FN21,FN21),
+        FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,     FN21,           \
+        FN21,FN21,FN21,          FN21,                    FN21,FN21,FN21,TRNS),
 
 
     /* Overlay X: xxxxxx
      * ,-----------------------------------------------------------.
-     * |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+     * |   |   |   |   |   |   |   |   |   |   |   |   |   |       |
      * |-----------------------------------------------------------|
      * |     |   |   |   |   |   |   |   |   |   |   |   |   |     |
      * |-----------------------------------------------------------|
      * |      |   |   |   |   |   |   |   |   |   |   |   |        |
      * |-----------------------------------------------------------|
-     * |        |   |   |   |   |   |   |   |   |   |   |     |    |
+     * |        |   |   |   |   |   |   |   |   |   |   |          |
      * |-----------------------------------------------------------|
      * |    |    |    |                        |    |    |    |    |
      * `-----------------------------------------------------------'
      */
 /*
-    KEYMAP_HHKB(
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, \
+    KEYMAP_ANSI(
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,      \
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,      \
         TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,      \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,TRNS,      \
+        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,          TRNS,      \
         TRNS,TRNS,TRNS,          TRNS,                    TRNS,TRNS,TRNS,TRNS),
 */
 };
