@@ -4,6 +4,8 @@
  * SpaceFN
  * http://geekhack.org/index.php?topic=51069.0
  */
+
+#define ____ TRNS
 const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Overlay 1: Default Keyboard Layout
      * ,-----------------------------------------------------------.
@@ -39,11 +41,11 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------'
      */
     KEYMAP_ANSI(
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS, \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,      \
-        TRNS,TRNS,TRNS,          FN0,                     TRNS,TRNS,TRNS,TRNS),
+        ____,____,____,____,____,____,____,____,____,____,____,____,____,____, \
+        ____,____,____,____,____,____,____,____,____,____,____,____,____,____, \
+        FN5 ,____,____,____,____,____,____,____,____,____,____,____,     ____, \
+        ____,____,____,____,____,____,____,____,____,____,____,     ____,      \
+        ____,____,____,          FN0,                     ____,____,____,____),
 
     /* Overlay 2: SpaceFN
      * ,-----------------------------------------------------------.
@@ -51,7 +53,7 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |-----------------------------------------------------------|
      * |     |   |PgU|   |   |   |   |   |   |Psc|Slk|Pau|Ins  |Del|
      * |-----------------------------------------------------------|
-     * |TRNS  |Hom|PgD|End|   |   |Lef|Dow|Up |Rig|   |   |Enter   |
+     * |____  |Hom|PgD|End|   |   |Lef|Dow|Up |Rig|   |   |Enter   |
      * |-----------------------------------------------------------|
      * |        |   |   |   |   |Spc|`  |~  |   |   |   |          |
      * |-----------------------------------------------------------|
@@ -60,10 +62,10 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     KEYMAP_ANSI(
         GRV, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, DEL,  \
-        TRNS,TRNS,PGUP,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,PSCR,SLCK,PAUS,INS, BSPC,  \
-        TRNS,HOME,PGDN,END, TRNS,TRNS,LEFT,DOWN,UP,  RGHT,TRNS,TRNS,     PENT, \
-        TRNS,TRNS,TRNS,TRNS,TRNS,SPC, GRV, FN2, TRNS,TRNS,TRNS,     TRNS,      \
-        TRNS,TRNS,TRNS,          TRNS,                    TRNS,TRNS,TRNS,TRNS),
+        ____,____,PGUP,____,____,____,____,____,____,PSCR,SLCK,PAUS,INS, BSPC,  \
+        ____,HOME,PGDN,END, ____,____,LEFT,DOWN,UP,  RGHT,____,____,     PENT, \
+        ____,____,____,____,____,SPC, GRV, FN2, ____,____,____,     ____,      \
+        ____,____,____,          ____,                    ____,____,____,____),
 
     /* Overlay 3: MouseKey
      * ,-----------------------------------------------------------.
@@ -79,11 +81,11 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------'
      */
     KEYMAP_ANSI(
-        FN30,F14, F15, FN3, FN4, TRNS,TRNS,MPRV,MPLY,MNXT,MUTE,VOLD,VOLU,TRNS,      \
-        TRNS,BTN2,MS_U,BTN1,WH_U,TRNS,TRNS,TRNS,UP,  TRNS,TRNS,TRNS,TRNS,TRNS,      \
-        TRNS,MS_L,MS_D,MS_R,WH_D,TRNS,TRNS,LEFT,DOWN,RGHT,TRNS,FN20,     TRNS,      \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,          TRNS,      \
-        TRNS,TRNS,TRNS,          BTN1,                    TRNS,TRNS,TRNS,TRNS),
+        FN30,F14, F15, FN3, FN4, ____,____,MPRV,MPLY,MNXT,MUTE,VOLD,VOLU,____,      \
+        ____,BTN2,MS_U,BTN1,WH_U,____,____,____,UP,  ____,____,____,____,____,      \
+        ____,MS_L,MS_D,MS_R,WH_D,____,____,LEFT,DOWN,RGHT,____,FN20,     ____,      \
+        ____,____,____,____,____,____,____,____,____,____,____,          ____,      \
+        ____,____,____,          BTN1,                    ____,____,____,____),
 
     /* Overlay 4: PASSWORD
      * ,-----------------------------------------------------------.
@@ -101,9 +103,9 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KEYMAP_ANSI(
         FN21,FN22,FN23,FN24,FN25,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,      \
         FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,      \
-        FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,TRNS,     FN21,      \
+        FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,____,     FN21,      \
         FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,     FN21,           \
-        FN21,FN21,FN21,          FN21,                    FN21,FN21,FN21,TRNS),
+        FN21,FN21,FN21,          FN21,                    FN21,FN21,FN21,____),
 
 
     /* Overlay X: xxxxxx
@@ -121,11 +123,11 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
 /*
     KEYMAP_ANSI(
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,      \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,      \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,      \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,          TRNS,      \
-        TRNS,TRNS,TRNS,          TRNS,                    TRNS,TRNS,TRNS,TRNS),
+        ____,____,____,____,____,____,____,____,____,____,____,____,____,____,      \
+        ____,____,____,____,____,____,____,____,____,____,____,____,____,____,      \
+        ____,____,____,____,____,____,____,____,____,____,____,____,     ____,      \
+        ____,____,____,____,____,____,____,____,____,____,____,          ____,      \
+        ____,____,____,          ____,                    ____,____,____,____),
 */
 };
 
@@ -143,7 +145,7 @@ enum macro_id {
 /*
  * Fn action definition
  */
-const uint16_t PROGMEM fn_actions[] = {
+const action_t PROGMEM fn_actions[] = {
     [0] = ACTION_LAYER_TAP_KEY(2, KC_SPACE),                                // SPACE LAYER
     [1] = ACTION_LAYER_MOMENTARY(3),                                        // MOUSE LAYER
     [2] = ACTION_MODS_KEY(MOD_LSFT, KC_GRV),                                // tilde
@@ -152,7 +154,7 @@ const uint16_t PROGMEM fn_actions[] = {
     [3] = ACTION_MODS_KEY(MOD_LCTL, KC_UP),                                 // Mission Control
     [4] = ACTION_MODS_KEY(MOD_LALT|MOD_LGUI, KC_L),                         // LaunchCenter
 
-    //[5] = ACTION_MODS_TAP_KEY(MOD_LCTL|MOD_LSFT|MOD_LALT|MOD_LGUI, KC_F19), // Soft MAGIC KEY
+    [5] = ACTION_MODS_TAP_KEY(MOD_LCTL|MOD_LSFT|MOD_LALT|MOD_LGUI, KC_F18), // Soft MAGIC KEY
     //[6] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_ESC),                            // click LCTL without other key = ESC
     //[7] = ACTION_FUNCTION_TAP(DOUBLE_CTRL),
 

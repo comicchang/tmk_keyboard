@@ -2,7 +2,7 @@
 Copyright 2012 Jun Wako <wakojun@gmail.com>
 
 This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
+it under the terms of   the GNU General Public License as published by
 the Free Software Foundation, either version 2 of the License, or
 (at your option) any later version.
 
@@ -16,47 +16,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "keymap_common.h"
-
+//#include "eeconfig.h"
+#define ____ TRNS
 
 const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] PROGMEM = {
-    /* 0: plain Qwerty without layer switching
-     *         ,---------------. ,---------------. ,---------------.
-     *         |F13|F14|F15|F16| |F17|F18|F19|F20| |F21|F22|F23|F24|
-     * ,---.   |---------------| |---------------| |---------------| ,-----------. ,---------------. ,-------.
-     * |Esc|   |F1 |F2 |F3 |F4 | |F5 |F6 |F7 |F8 | |F9 |F10|F11|F12| |PrS|ScL|Pau| |VDn|VUp|Mut|Pwr| | Help  |
-     * `---'   `---------------' `---------------' `---------------' `-----------' `---------------' `-------'
-     * ,-----------------------------------------------------------. ,-----------. ,---------------. ,-------.
-     * |  `|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|JPY|Bsp| |Ins|Hom|PgU| |NmL|  /|  *|  -| |Stp|Agn|
-     * |-----------------------------------------------------------| |-----------| |---------------| |-------|
-     * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|  \  | |Del|End|PgD| |  7|  8|  9|  +| |Mnu|Und|
-     * |-----------------------------------------------------------| `-----------' |---------------| |-------|
-     * |CapsL |  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  :|  #|Retn|               |  4|  5|  6|KP,| |Sel|Cpy|
-     * |-----------------------------------------------------------|     ,---.     |---------------| |-------|
-     * |Shft|  <|  Z|  X|  C|  V|  B|  N|  M|  ,|  ,|  /| RO|Shift |     |Up |     |  1|  2|  3|KP=| |Exe|Pst|
-     * |-----------------------------------------------------------| ,-----------. |---------------| |-------|
-     * |Ctl|Gui|Alt|MHEN|HNJ| Space  |H/E|HENK|KANA|Alt|Gui|App|Ctl| |Lef|Dow|Rig| |  0    |  .|Ent| |Fnd|Cut|
-     * `-----------------------------------------------------------' `-----------' `---------------' `-------'
-     */
-    KEYMAP_ALL(
-              F13, F14, F15, F16, F17, F18, F19, F20, F21, F22, F23, F24,
-    ESC,      F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12,           PSCR,SLCK,PAUS,    VOLD,VOLU,MUTE,PWR,     HELP,
-    GRV, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, JYEN,BSPC,     INS, HOME,PGUP,    NLCK,PSLS,PAST,PMNS,    STOP,AGIN,
-    TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC,RBRC,     BSLS,     DEL, END, PGDN,    P7,  P8,  P9,  PPLS,    MENU,UNDO,
-    CAPS,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,     NUHS,ENT,                         P4,  P5,  P6,  PCMM,    SLCT,COPY,
-    LSFT,NUBS,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,     RO,  RSFT,          UP,           P1,  P2,  P3,  PEQL,    EXEC,PSTE,
-    LCTL,LGUI,LALT,MHEN,HANJ,     SPC,      HAEN,HENK,KANA,RALT,RGUI,APP, RCTL,     LEFT,DOWN,RGHT,    P0,       PDOT,PENT,    FIND,CUT
-    ),
-};
-
-const action_t fn_actions[] PROGMEM = {};
-
-
-
-/*
- * Keymap samples
- */
-#if 0
-    /* ANSI layout
+    /* layer 0: Base layer
      * ,---.   ,---------------. ,---------------. ,---------------. ,-----------.
      * |Esc|   |F1 |F2 |F3 |F4 | |F5 |F6 |F7 |F8 | |F9 |F10|F11|F12| |PrS|ScL|Pau|
      * `---'   `---------------' `---------------' `---------------' `-----------'
@@ -78,189 +42,228 @@ const action_t fn_actions[] PROGMEM = {};
     TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC,RBRC,BSLS,     DEL, END, PGDN,    P7,  P8,  P9,
     LCTL,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,     ENT,                         P4,  P5,  P6,  PPLS,
     LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,          RSFT,          UP,           P1,  P2,  P3,
-    LCTL,LGUI,LALT,          SPC,                     RALT,RGUI,APP, RCTL,     LEFT,DOWN,RGHT,    P0,       PDOT,PENT
+    LCTL,LGUI,LALT,          SPC,                     RALT,RGUI,APP, FN1 ,     LEFT,DOWN,RGHT,    P0,       PDOT,PENT
     ),
 
-    /* ISO layout
+    /* Overlay 1: default layer
      * ,---.   ,---------------. ,---------------. ,---------------. ,-----------.
      * |Esc|   |F1 |F2 |F3 |F4 | |F5 |F6 |F7 |F8 | |F9 |F10|F11|F12| |PrS|ScL|Pau|
      * `---'   `---------------' `---------------' `---------------' `-----------'
      * ,-----------------------------------------------------------. ,-----------. ,---------------.
-     * |  `|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  ^|    Bsp| |Ins|Hom|PgU| |NmL|  /|  *|  -|
+     * |  `|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|    Bsp| |Ins|Hom|PgU| |NmL|  /|  *|  -|
      * |-----------------------------------------------------------| |-----------| |---------------|
-     * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]| Retn| |Del|End|PgD| |  7|  8|  9|  +|
-     * |------------------------------------------------------`    | `-----------' |-----------|   |
-     * |CapsL |  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  '|  #|    |               |  4|  5|  6|   |
+     * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|  \  | |Del|End|PgD| |  7|  8|  9|  +|
+     * |-----------------------------------------------------------| `-----------' |-----------|   |
+     * |CapsL |  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  '|  Return|               |  4|  5|  6|   |
      * |-----------------------------------------------------------|     ,---.     |---------------|
-     * |Shft|\  |  Z|  X|  C|  V|  B|  N|  M|  ,|  ,|  /|Shift     |     |Up |     |  1|  2|  3|Ent|
+     * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  ,|  /|Shift     |     |Up |     |  1|  2|  3|   |
      * |-----------------------------------------------------------| ,-----------. |-----------|   |
-     * |Ctl|Gui|Alt|           Space       |HNK|KNA|Alt|Gui|App|Ctl| |Lef|Dow|Rig| |      0|  .|   |
+     * |Ctl|Gui|Alt|           Space               |Alt|Gui|App|Ctl| |Lef|Dow|Rig| |      0|  .|Ent|
      * `-----------------------------------------------------------' `-----------' `---------------'
      */
-    KEYMAP_ISO(
-    ESC,      F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12,      PSCR,SLCK,BRK,
-    GRV, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, BSPC,     INS, HOME,PGUP,    NLCK,PSLS,PAST,PMNS,
-    TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC,RBRC,ENT,      DEL, END, PGDN,    P7,  P8,  P9,  PPLS,
-    LCTL,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,NUHS,                             P4,  P5,  P6,
-    LSFT,NUBS,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,     RSFT,          UP,           P1,  P2,  P3,  PENT,
-    LCTL,LGUI,LALT,          SPC,                     RALT,RGUI,APP, RCTL,     LEFT,DOWN,RGHT,    P0,       PDOT 
+    KEYMAP(
+    ____,     ____,____,____,____,____,____,____,____,____,____,____,____,    ____,____,____,
+    ____,____,____,____,____,____,____,____,____,____,____,____,____,____,    ____, ____,____,   ____,____,____,____,
+    ____,____,____,____,____,____,____,____,____,____,____,____,____,____,    ____,____, ____,   ____,____,____,
+    FN5 ,____,____,____,____,____,____,____,____,____,____,____,     ____,                       ____,____,____,____,
+    ____,____,____,____,____,____,____,____,____,____,____,          ____,         ____,         ____,____,____,
+    ____,____,____,          FN0,                    ____,____,____, ____,    ____,____,____,    ____,     ____,____
     ),
 
-    /* JIS layout
+    /* Overlay 2: SpaceFN
      * ,---.   ,---------------. ,---------------. ,---------------. ,-----------.
      * |Esc|   |F1 |F2 |F3 |F4 | |F5 |F6 |F7 |F8 | |F9 |F10|F11|F12| |PrS|ScL|Pau|
      * `---'   `---------------' `---------------' `---------------' `-----------'
      * ,-----------------------------------------------------------. ,-----------. ,---------------.
-     * |  `|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  ^|JPY|Bsp| |Ins|Hom|PgU| |NmL|  /|  *|  -|
+     * |  `|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|    Bsp| |Ins|Hom|PgU| |NmL|  /|  *|  -|
      * |-----------------------------------------------------------| |-----------| |---------------|
-     * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  @|  [| Retn| |Del|End|PgD| |  7|  8|  9|  +|
-     * |------------------------------------------------------`    | `-----------' |-----------|   |
-     * |CapsL |  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  :|  ]|    |               |  4|  5|  6|   |
+     * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|  \  | |Del|End|PgD| |  7|  8|  9|  +|
+     * |-----------------------------------------------------------| `-----------' |-----------|   |
+     * |CapsL |  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  '|  Return|               |  4|  5|  6|   |
      * |-----------------------------------------------------------|     ,---.     |---------------|
-     * |Shft    |  Z|  X|  C|  V|  B|  N|  M|  ,|  ,|  /| RO|Shift |     |Up |     |  1|  2|  3|Ent|
+     * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  ,|  /|Shift     |     |Up |     |  1|  2|  3|   |
      * |-----------------------------------------------------------| ,-----------. |-----------|   |
-     * |Ctl|Gui|Alt|MHEN|      Space      |HENK|KNA|Alt|Gui|App|Ctl| |Lef|Dow|Rig| |      0|  .|   |
+     * |Ctl|Gui|Alt|           Space               |Alt|Gui|App|Ctl| |Lef|Dow|Rig| |      0|  .|Ent|
      * `-----------------------------------------------------------' `-----------' `---------------'
      */
-    KEYMAP_JIS(
-    ESC,      F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12,           PSCR,SLCK,BRK,
-    GRV, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, JPY, BSPC,     INS, HOME,PGUP,    NLCK,PSLS,PAST,PMNS,
-    TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC,RBRC,     ENT,      DEL, END, PGDN,    P7,  P8,  P9,  PPLS,
-    LCTL,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,NUHS,                                  P4,  P5,  P6,
-    LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,          RO,  RSFT,          UP,           P1,  P2,  P3,  PENT,
-    LCTL,LGUI,LALT,MHEN,     SPC,                HENK,KANA,RALT,RGUI,APP, RCTL,     LEFT,DOWN,RGHT,    P0,       PDOT 
+
+    KEYMAP(
+    ____,     ____,____,____,____,____,____,____,____,____,____,____,____,    ____,____,____,
+    ____,  F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9, F10, F11, F12,DEL ,    ____, ____,____,   ____,____,____,____,
+    ____,____,PGUP,____,____,____,____,____,____,PSCR,SLCK,PAUS,INS ,____,    ____,____, ____,   ____,____,____,
+    ____,HOME,PGDN,END ,____,____,LEFT,DOWN,UP  ,RGHT,____,____,     PENT,                       ____,____,____,____,
+    ____,____,____,____,____,SPC, GRV,  FN2,____,____,____,          ____,         ____,         ____,____,____,
+    ____,____,____,         ____,                    ____,____,____, ____,    ____,____,____,    ____,     ____,____
     ),
 
-    /* Colemak http://colemak.com
-     * ,-----------------------------------------------------------.
-     * |  `|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|Backspa|
-     * |-----------------------------------------------------------|
-     * |Tab  |  Q|  W|  F|  P|  G|  J|  L|  U|  Y|  ;|  [|  ]|    \|
-     * |-----------------------------------------------------------|
-     * |BackSp|  A|  R|  S|  T|  D|  H|  N|  E|  I|  O|  '|Return  |
-     * |-----------------------------------------------------------|
-     * |Shift   |  Z|  X|  C|  V|  B|  K|  M|  ,|  ,|  /|Shift     |
-     * |-----------------------------------------------------------|
-     * |Ctrl |Gui |Alt |         Space         |Alt |Gui |Menu|Ctrl|
-     * `----------------------------------------------------------'
+    /* Overlay 3: MouseKey
+     * ,---.   ,---------------. ,---------------. ,---------------. ,-----------.
+     * |Esc|   |F1 |F2 |F3 |F4 | |F5 |F6 |F7 |F8 | |F9 |F10|F11|F12| |PrS|ScL|Pau|
+     * `---'   `---------------' `---------------' `---------------' `-----------'
+     * ,-----------------------------------------------------------. ,-----------. ,---------------.
+     * |  `|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|    Bsp| |Ins|Hom|PgU| |NmL|  /|  *|  -|
+     * |-----------------------------------------------------------| |-----------| |---------------|
+     * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|  \  | |Del|End|PgD| |  7|  8|  9|  +|
+     * |-----------------------------------------------------------| `-----------' |-----------|   |
+     * |CapsL |  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  '|  Return|               |  4|  5|  6|   |
+     * |-----------------------------------------------------------|     ,---.     |---------------|
+     * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  ,|  /|Shift     |     |Up |     |  1|  2|  3|   |
+     * |-----------------------------------------------------------| ,-----------. |-----------|   |
+     * |Ctl|Gui|Alt|           Space               |Alt|Gui|App|Ctl| |Lef|Dow|Rig| |      0|  .|Ent|
+     * `-----------------------------------------------------------' `-----------' `---------------'
      */
-    KEYMAP_ALL(
-              F13, F14, F15, F16, F17, F18, F19, F20, F21, F22, F23, F24,
-    ESC,      F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12,           PSCR,SLCK,PAUS,    VOLD,VOLU,MUTE,PWR,     HELP,
-    GRV, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, JYEN,BSPC,     INS, HOME,PGUP,    NLCK,PSLS,PAST,PMNS,    STOP,AGIN,
-    TAB, Q,   W,   F,   P,   G,   J,   L,   U,   Y,   SCLN,LBRC,RBRC,     BSLS,     DEL, END, PGDN,    P7,  P8,  P9,  PPLS,    MENU,UNDO,
-    BSPC,A,   R,   S,   T,   D,   H,   N,   E,   I,   O,   QUOT,     NUHS,ENT,                         P4,  P5,  P6,  PCMM,    SLCT,COPY,
-    LSFT,NUBS,Z,   X,   C,   V,   B,   K,   M,   COMM,DOT, SLSH,     RO,  RSFT,          UP,           P1,  P2,  P3,  PEQL,    EXEC,PSTE,
-    LCTL,LGUI,LALT,MHEN,HANJ,     SPC,      HAEN,HENK,KANA,RALT,RGUI,APP, RCTL,     LEFT,DOWN,RGHT,    P0,       PDOT,PENT,    FIND,CUT
+
+    KEYMAP(
+    FN30,     F14 ,F15 ,FN3 ,FN4 ,____,____,MPRV,MPLY,MNXT,MUTE,VOLD,VOLU,    ____,____,____,
+    FN30,F14 ,F15 ,FN3 ,FN4 ,____,____,MPRV,MPLY,MNXT,MUTE,VOLD,VOLU,____,    ____, ____,____,   ____,____,____,____,
+    ____,BTN2,MS_U,BTN1,WH_U,____,____,____,UP  ,____,____,____,____,____,    ____,____, ____,   ____,____,____,
+    ____,MS_L,MS_D,MS_R,WH_D,____,____,LEFT,DOWN,RGHT,____,FN20,     ____,                       ____,____,____,____,
+    ____,____,____,____,____,____,____,____,____,____,____,          ____,         ____,         ____,____,____,
+    FN31,____,____,         BTN1,                    ____,____,____, ____,    ____,____,____,    ____,     ____,____
     ),
 
-    /* Dvorak http://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard
-     * ,-----------------------------------------------------------.
-     * |  `|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  [|  ]|Backspa|
-     * |-----------------------------------------------------------|
-     * |Tab  |  '|  ,|  .|  P|  Y|  F|  G|  C|  R|  L|  /|  =|    \|
-     * |-----------------------------------------------------------|
-     * |BackSp|  A|  O|  E|  U|  I|  D|  H|  T|  N|  S|  -|Return  |
-     * |-----------------------------------------------------------|
-     * |Shift   |  ;|  Q|  J|  K|  X|  B|  M|  Wl  V|  Z|Shift     |
-     * |-----------------------------------------------------------|
-     * |Ctrl |Gui |Alt |         Space         |Alt |Gui |Menu|Ctrl|
-     * `-----------------------------------------------------------'
+    /* Overlay 4: PASSWORD
+     * ,---.   ,---------------. ,---------------. ,---------------. ,-----------.
+     * |Esc|   |F1 |F2 |F3 |F4 | |F5 |F6 |F7 |F8 | |F9 |F10|F11|F12| |PrS|ScL|Pau|
+     * `---'   `---------------' `---------------' `---------------' `-----------'
+     * ,-----------------------------------------------------------. ,-----------. ,---------------.
+     * |  `|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|    Bsp| |Ins|Hom|PgU| |NmL|  /|  *|  -|
+     * |-----------------------------------------------------------| |-----------| |---------------|
+     * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|  \  | |Del|End|PgD| |  7|  8|  9|  +|
+     * |-----------------------------------------------------------| `-----------' |-----------|   |
+     * |CapsL |  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  '|  Return|               |  4|  5|  6|   |
+     * |-----------------------------------------------------------|     ,---.     |---------------|
+     * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  ,|  /|Shift     |     |Up |     |  1|  2|  3|   |
+     * |-----------------------------------------------------------| ,-----------. |-----------|   |
+     * |Ctl|Gui|Alt|           Space               |Alt|Gui|App|Ctl| |Lef|Dow|Rig| |      0|  .|Ent|
+     * `-----------------------------------------------------------' `-----------' `---------------'
      */
-    KEYMAP_ALL(
-              F13, F14, F15, F16, F17, F18, F19, F20, F21, F22, F23, F24,
-    ESC,      F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12,           PSCR,SLCK,PAUS,    VOLD,VOLU,MUTE,PWR,     HELP,
-    GRV, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   LBRC,RBRC,JYEN,BSPC,     INS, HOME,PGUP,    NLCK,PSLS,PAST,PMNS,    STOP,AGIN,
-    TAB, QUOT,COMM,DOT, P,   Y,   F,   G,   C,   R,   L,   SLSH,EQL,      BSLS,     DEL, END, PGDN,    P7,  P8,  P9,  PPLS,    MENU,UNDO,
-    CAPS,A,   O,   E,   U,   I,   D,   H,   T,   N,   S,   MINS,     NUHS,ENT,                         P4,  P5,  P6,  PCMM,    SLCT,COPY,
-    LSFT,NUBS,SCLN,Q,   J,   K,   X,   B,   M,   W,   V,   Z,        RO,  RSFT,          UP,           P1,  P2,  P3,  PEQL,    EXEC,PSTE,
-    LCTL,LGUI,LALT,MHEN,HANJ,     SPC,      HAEN,HENK,KANA,RALT,RGUI,APP, RCTL,     LEFT,DOWN,RGHT,    P0,       PDOT,PENT,    FIND,CUT
+
+    KEYMAP(
+    FN21,     FN22,FN23,FN24,FN25,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,    FN21,FN21,FN21,
+    FN21,FN22,FN23,FN24,FN25,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,    FN21,FN21,FN21,   FN21,FN21,FN21,FN21,
+    FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,    FN21,FN21, FN21,   FN21,FN21,FN21,
+    FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,____,     FN21,                       FN21,FN21,FN21,FN21,
+    FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,          FN21,         FN21,         FN21,FN21,FN21,
+    FN21,FN21,FN21,         FN21,                    FN21,FN21,FN21, ____,    FN21,FN21,FN21,    FN21,     FN21,FN21
     ),
 
-    /* Workman http://viralintrospection.wordpress.com/2010/09/06/a-different-philosophy-in-designing-keyboard-layouts/
-     * ,-----------------------------------------------------------.
-     * |  `|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|Backspa|
-     * |-----------------------------------------------------------|
-     * |Tab  |  Q|  D|  R|  W|  B|  J|  F|  U|  P|  ;|  [|  ]|    \|
-     * |-----------------------------------------------------------|
-     * |CapsLo|  A|  S|  H|  T|  G|  Y|  N|  E|  O|  I|  '|Return  |
-     * |-----------------------------------------------------------|
-     * |Shift   |  Z|  X|  M|  C|  V|  K|  L|  ,|  ,|  /|Shift     |
-     * |-----------------------------------------------------------|
-     * |Ctrl |Gui |Alt |         Space         |Alt |Gui |Menu|Ctrl|
-     * `-----------------------------------------------------------'
+
+    /* ANSI layout
+     * ,---.   ,---------------. ,---------------. ,---------------. ,-----------.
+     * |Esc|   |F1 |F2 |F3 |F4 | |F5 |F6 |F7 |F8 | |F9 |F10|F11|F12| |PrS|ScL|Pau|
+     * `---'   `---------------' `---------------' `---------------' `-----------'
+     * ,-----------------------------------------------------------. ,-----------. ,---------------.
+     * |  `|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|    Bsp| |Ins|Hom|PgU| |NmL|  /|  *|  -|
+     * |-----------------------------------------------------------| |-----------| |---------------|
+     * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|  \  | |Del|End|PgD| |  7|  8|  9|  +|
+     * |-----------------------------------------------------------| `-----------' |-----------|   |
+     * |CapsL |  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  '|  Return|               |  4|  5|  6|   |
+     * |-----------------------------------------------------------|     ,---.     |---------------|
+     * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  ,|  /|Shift     |     |Up |     |  1|  2|  3|   |
+     * |-----------------------------------------------------------| ,-----------. |-----------|   |
+     * |Ctl|Gui|Alt|           Space               |Alt|Gui|App|Ctl| |Lef|Dow|Rig| |      0|  .|Ent|
+     * `-----------------------------------------------------------' `-----------' `---------------'
      */
-    KEYMAP_ALL(
-              F13, F14, F15, F16, F17, F18, F19, F20, F21, F22, F23, F24,
-    ESC,      F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12,           PSCR,SLCK,PAUS,    VOLD,VOLU,MUTE,PWR,     HELP,
-    GRV, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, JYEN,BSPC,     INS, HOME,PGUP,    NLCK,PSLS,PAST,PMNS,    STOP,AGIN,
-    TAB, Q,   D,   R,   W,   B,   J,   F,   U,   P,   SCLN,LBRC,RBRC,     BSLS,     DEL, END, PGDN,    P7,  P8,  P9,  PPLS,    MENU,UNDO,
-    CAPS,A,   S,   H,   T,   G,   Y,   N,   E,   O,   I,   QUOT,     NUHS,ENT,                         P4,  P5,  P6,  PCMM,    SLCT,COPY,
-    LSFT,NUBS,Z,   X,   M,   C,   V,   K,   L,   COMM,DOT, SLSH,     RO,  RSFT,          UP,           P1,  P2,  P3,  PEQL,    EXEC,PSTE,
-    LCTL,LGUI,LALT,MHEN,HANJ,     SPC,      HAEN,HENK,KANA,RALT,RGUI,APP, RCTL,     LEFT,DOWN,RGHT,    P0,       PDOT,PENT,    FIND,CUT
+    /*
+    KEYMAP(
+    ____,     ____,____,____,____,____,____,____,____,____,____,____,____,    ____,____,____,
+    ____,____,____,____,____,____,____,____,____,____,____,____,____,____,    ____, ____,____,   ____,____,____,____,
+    ____,____,____,____,____,____,____,____,____,____,____,____,____,____,    ____,____, ____,   ____,____,____,
+    ____,  ____,____,____,____,____,____,____,____,____,____,____,   ____,                       ____,____,____,____,
+    ____,    ____,____,____,____,____,____,____,____,____,____,      ____,         ____,         ____,____,____,
+    ____,____,____,         ____,                    ____,____,____, ____,    ____,____,____,    ____,     ____,____
     ),
+    */
+
+};
+
+
+enum function_id {
+    TRICKY_ESC,
+    DOUBLE_CTRL,
+    SET_DEFAULT_LAYER,
+};
+enum macro_id {
+    CLEAR,
+    PASSWORD1,
+    PASSWORD2,
+    PASSWORD3,
+};
+
+/*
+ * Fn action definition
+ */
+const action_t fn_actions[] PROGMEM  = {
+    [0] = ACTION_LAYER_TAP_KEY(2, KC_SPACE),                                // SPACE LAYER
+    [1] = ACTION_LAYER_MOMENTARY(3),                                        // MOUSE LAYER
+    [2] = ACTION_MODS_KEY(MOD_LSFT, KC_GRV),                                // tilde
+
+    // Media keys in mousekey layer
+    [3] = ACTION_MODS_KEY(MOD_LCTL, KC_UP),                                 // Mission Control
+    [4] = ACTION_MODS_KEY(MOD_LALT|MOD_LGUI, KC_L),                         // LaunchCenter
+
+    [5] = ACTION_MODS_TAP_KEY(MOD_LCTL|MOD_LSFT|MOD_LALT|MOD_LGUI, KC_F18), // Soft MAGIC KEY
+    //[6] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_ESC),                            // click LCTL without other key = ESC
+    //[7] = ACTION_FUNCTION_TAP(DOUBLE_CTRL),
+
+    // Shift + ESC = ~
+    [8] = ACTION_FUNCTION (TRICKY_ESC),
+
+    // FN + ' = password layer
+    [20] = ACTION_LAYER_INVERT(4,ON_BOTH),
+    [21] = ACTION_LAYER_OFF(4,ON_PRESS),
+    [22] = ACTION_MACRO(CLEAR),
+    [23] = ACTION_MACRO(PASSWORD1),
+    [24] = ACTION_MACRO(PASSWORD2),
+    [25] = ACTION_MACRO(PASSWORD3),
+
+    // FN + ESC = Toggle SpaceFN off (or game mode)
+    [30] = ACTION_LAYER_INVERT(1, ON_PRESS),
+    [31] = ACTION_FUNCTION (SET_DEFAULT_LAYER),
+};
 
 
 /*
- * SpaceFN layout
- * http://geekhack.org/index.php?topic=51069.0
+ * Macro definition
  */
-const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    /* 0: plain Qwerty
-     *         ,---------------. ,---------------. ,---------------.
-     *         |F13|F14|F15|F16| |F17|F18|F19|F20| |F21|F22|F23|F24|
-     * ,---.   |---------------| |---------------| |---------------| ,-----------. ,---------------. ,-------.
-     * |Esc|   |F1 |F2 |F3 |F4 | |F5 |F6 |F7 |F8 | |F9 |F10|F11|F12| |PrS|ScL|Pau| |VDn|VUp|Mut|Pwr| | Help  |
-     * `---'   `---------------' `---------------' `---------------' `-----------' `---------------' `-------'
-     * ,-----------------------------------------------------------. ,-----------. ,---------------. ,-------.
-     * |  `|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|JPY|Bsp| |Ins|Hom|PgU| |NmL|  /|  *|  -| |Stp|Agn|
-     * |-----------------------------------------------------------| |-----------| |---------------| |-------|
-     * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|  \  | |Del|End|PgD| |  7|  8|  9|  +| |Mnu|Und|
-     * |-----------------------------------------------------------| `-----------' |---------------| |-------|
-     * |LCtrl |  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  :|  #|Retn|               |  4|  5|  6|KP,| |Sel|Cpy|
-     * |-----------------------------------------------------------|     ,---.     |---------------| |-------|
-     * |Shft|  <|  Z|  X|  C|  V|  B|  N|  M|  ,|  ,|  /| RO|Shift |     |Up |     |  1|  2|  3|KP=| |Exe|Pst|
-     * |-----------------------------------------------------------| ,-----------. |---------------| |-------|
-     * |Ctl|Gui|Alt|MHEN|HNJ| Space  |H/E|HENK|KANA|Alt|Gui|App|Ctl| |Lef|Dow|Rig| |  0    |  .|Ent| |Fnd|Cut|
-     * `-----------------------------------------------------------' `-----------' `---------------' `-------'
-     */
-    [0] = KEYMAP_ALL(
-              F13, F14, F15, F16, F17, F18, F19, F20, F21, F22, F23, F24,
-    ESC,      F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12,           PSCR,SLCK,PAUS,    VOLD,VOLU,MUTE,PWR,     HELP,
-    ESC, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, JYEN,BSPC,     INS, HOME,PGUP,    NLCK,PSLS,PAST,PMNS,    STOP,AGIN,
-    TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC,RBRC,     BSLS,     DEL, END, PGDN,    P7,  P8,  P9,  PPLS,    MENU,UNDO,
-    LCTL,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,     NUHS,ENT,                         P4,  P5,  P6,  PCMM,    SLCT,COPY,
-    LSFT,NUBS,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,     RO,  RSFT,          UP,           P1,  P2,  P3,  PEQL,    EXEC,PSTE,
-    LCTL,LGUI,LALT,MHEN,HANJ,     FN0,      HAEN,HENK,KANA,RALT,RGUI,APP, RCTL,     LEFT,DOWN,RGHT,    P0,       PDOT,PENT,    FIND,CUT
-    ),
+#include "keymap_passwords.h"
+const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
+{
+    switch (id) {
+        case CLEAR: if (record->event.pressed) {return MACRO_CLEAR;};
+        case PASSWORD1: if (record->event.pressed) {return MACRO_PASSWORD1;};
+        case PASSWORD2: if (record->event.pressed) {return MACRO_PASSWORD2;};
+        case PASSWORD3: if (record->event.pressed) {return MACRO_PASSWORD3;};
+    }
+    return MACRO_NONE;
+}
 
-    /* 1: SpaceFN
-     * ,-----------------------------------------------------------.
-     * |`  | F1| F2| F3| F4| F5| F6| F7| F8| F9|F10|F11|F12|Delete |
-     * |-----------------------------------------------------------|
-     * |Caps |   |   |Esc|   |   |   |Hom|Up |End|Psc|Slk|Pau|Ins  |
-     * |-----------------------------------------------------------|
-     * |      |   |   |   |   |   |PgU|Lef|Dow|Rig|   |   |        |
-     * |-----------------------------------------------------------|
-     * |        |   |   |   |   |Spc|PgD|`  |~  |   |Men|          |
-     * |-----------------------------------------------------------|
-     * |    |    |    |                        |    |    |    |    |
-     * `-----------------------------------------------------------'
-     */
-    [1] = KEYMAP_ALL(
-              TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,
-    TRNS,     TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,          TRNS,TRNS,TRNS,    TRNS,TRNS,TRNS,TRNS,    TRNS,
-    GRV, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, TRNS,DEL,      TRNS,TRNS,TRNS,    TRNS,TRNS,TRNS,TRNS,    TRNS,TRNS,
-    CAPS,TRNS,TRNS,ESC, TRNS,TRNS,TRNS,HOME,UP,  END, PSCR,SLCK,PAUS,     INS,      TRNS,TRNS,TRNS,    TRNS,TRNS,TRNS,TRNS,    TRNS,TRNS,
-    TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,PGUP,LEFT,DOWN,RGHT,TRNS,TRNS,     TRNS,TRNS,                        TRNS,TRNS,TRNS,TRNS,    TRNS,TRNS,
-    TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,SPC, PGDN,GRV, FN1, TRNS,APP,      TRNS,TRNS,          TRNS,         TRNS,TRNS,TRNS,TRNS,    TRNS,TRNS,
-    TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,     TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,     TRNS,TRNS,TRNS,    TRNS,     TRNS,TRNS,    TRNS,TRNS
-    ),
-};
-
-const action_t PROGMEM fn_actions[] = {
-    [0] = ACTION_LAYER_TAP_KEY(1, KC_SPACE),
-    [1] = ACTION_MODS_KEY(MOD_LSFT, KC_GRV),    // tilde
-};
-
-#endif
+#define MODS_SHIFT_MASK (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
+void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
+{
+    static uint8_t tricky_esc_registered;
+    switch (id) {
+        case SET_DEFAULT_LAYER:
+            //eeconfig_write_default_layer((1<<1));
+            break;
+//        case DOUBLE_CTRL:
+        case TRICKY_ESC:
+            if (record->event.pressed) {
+                if (get_mods() & MODS_SHIFT_MASK) {
+                    tricky_esc_registered = KC_GRV;
+                }
+                else {
+                    tricky_esc_registered = KC_ESC;
+                }
+                add_key(tricky_esc_registered);
+                send_keyboard_report();
+            }
+            else {
+                del_key(tricky_esc_registered);
+                send_keyboard_report();
+            }
+        default:
+            break;
+    }
+}
