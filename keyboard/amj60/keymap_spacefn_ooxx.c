@@ -8,8 +8,8 @@
 #define ____ TRNS
 
 enum keymap_layout {
-    SAFE = 0,
-    SPCFN,
+    BASE = 0,
+    NORMAL,
     MAC,
     SPACEFN,
     MOUSE,
@@ -17,7 +17,7 @@ enum keymap_layout {
 };
 
 const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    /* Overlay 1: Default Keyboard Layout
+    /* Layer 0: base Keyboard Layout
      * ,-----------------------------------------------------------.
      * |ESC|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|  \|  `|
      * |-----------------------------------------------------------|
@@ -30,14 +30,14 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |Ctrl|Alt |Cmd |      Space             |Alt |Gui |Caps|Ctrl|
      * `-----------------------------------------------------------'
      */
-    [SAFE] = KEYMAP_HHKB(
+    [BASE] = KEYMAP_HHKB(
         FN8, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, BSLS, GRV, \
         TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC,RBRC,BSPC, \
         CAPS,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,     ENT,  \
         LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,     RSFT,FN1,  \
         LCTL,LGUI,LALT,          SPC,                     RALT,RGUI,CAPS,RCTL),
 
-    /* Keymap 0: Default Layer
+    /* Overlay 1: normal Layer
      * ,-----------------------------------------------------------.
      * |FN8|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|  \|  `|
      * |-----------------------------------------------------------|
@@ -50,14 +50,14 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |Ctrl|Alt |Cmd |      SpaceFN           |Alt |Gui |Caps|Ctrl|
      * `-----------------------------------------------------------'
      */
-    [SPCFN] = KEYMAP_HHKB(
+    [NORMAL] = KEYMAP_HHKB(
         ____,____,____,____,____,____,____,____,____,____,____,____,____,____,____, \
         ____,____,____,____,____,____,____,____,____,____,____,____,____,____,      \
         FN6 ,____,____,____,____,____,____,____,____,____,____,____,     ____,      \
         ____,____,____,____,____,____,____,____,____,____,____,     ____,____,      \
         ____,____,____,          FN0,                     ____,____,____,____),
 
-    /* Overlay 1: MAC
+    /* Overlay 2: MAC
      * ,-----------------------------------------------------------.
      * |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
      * |-----------------------------------------------------------|
@@ -79,13 +79,13 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ____,LALT,LGUI,          ____,                    RGUI,RALT,____,____),
 
 
-    /* Overlay 2: SpaceFN
+    /* Overlay 3: SpaceFN
      * ,-----------------------------------------------------------.
      * |`  | F1| F2| F3| F4| F5| F6| F7| F8| F9|F10|F11|F12|Bsp|Bsp|
      * |-----------------------------------------------------------|
      * |     |   |PgU|   |   |   |   |   |   |Psc|Slk|Pau|Ins  |Del|
      * |-----------------------------------------------------------|
-     * |____  |Hom|PgD|End|   |   |Lef|Dow|Up |Rig|   |   |Enter   |
+     * |      |Hom|PgD|End|   |   |Lef|Dow|Up |Rig|   |   |Enter   |
      * |-----------------------------------------------------------|
      * |        |   |   |   |   |Spc|`  |~  |   |   |   |     |    |
      * |-----------------------------------------------------------|
@@ -99,7 +99,7 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ____,____,____,____,____,SPC, GRV, FN2, ____,____,____,     ____,____, \
         ____,____,____,          ____,                    ____,____,____,____),
 
-    /* Overlay 3: MouseKey
+    /* Overlay 4: MouseKey
      * ,-----------------------------------------------------------.
      * |CLR|F14|F15|FN3|FN4|   |   |PRV|PLY|NXT|Mut|VoD|VlU|   |   |
      * |-----------------------------------------------------------|
@@ -119,11 +119,11 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ____,____,____,____,____,____,____,____,____,____,____,     ____,____,      \
         ____,____,____,          BTN1,                    ____,____,____,____),
 
-    /* Overlay 4: PASSWORD
+    /* Overlay 5: PASSWORD
      * ,-----------------------------------------------------------.
      * |EXT|CLR|PW1|PW2|PW3|   |   |   |   |   |   |   |   |   |   |
      * |-----------------------------------------------------------|
-     * |     |SPC|MAC|   |BOT|   |   |   |   |   |   |   |   |     |
+     * |     |SPC|MAC|   |RST|   |   |   |   |   |   |   |   |     |
      * |-----------------------------------------------------------|
      * |      |   |   |   |   |   |   |   |   |   |   |   |        |
      * |-----------------------------------------------------------|
@@ -166,7 +166,7 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 enum function_id {
     TRICKY_ESC,
     DOUBLE_CTRL,
-    SET_DEFAULT_LAYER_SPCFN,
+    SET_DEFAULT_LAYER_NORMAL,
     SET_DEFAULT_LAYER_MAC,
     JUMP_BOOTLOADER,
 };
@@ -182,32 +182,32 @@ enum macro_id {
  */
 const action_t PROGMEM fn_actions[] = {
 
-    [0]  = ACTION_LAYER_TAP_KEY(SPACEFN, KC_SPACE),                          // SPACE LAYER
-    [1]  = ACTION_LAYER_MOMENTARY(MOUSE),                                    // MOUSE LAYER
-    [2]  = ACTION_MODS_KEY(MOD_LSFT, KC_GRV),                                // tilde
+    [0]  = ACTION_LAYER_TAP_KEY   ( SPACEFN, KC_SPACE), // SPACE LAYER
+    [1]  = ACTION_LAYER_MOMENTARY ( MOUSE),             // MOUSE LAYER
+    [2]  = ACTION_MODS_KEY        ( MOD_LSFT, KC_GRV),  // tilde
 
     // Media keys in mousekey layer
-    [3]  = ACTION_MODS_KEY(MOD_LCTL, KC_UP),                                 // Mission Control
-    [4]  = ACTION_MODS_KEY(MOD_LALT|MOD_LGUI, KC_L),                         // LaunchCenter
-    [5]  = ACTION_MODS_TAP_KEY(MOD_LCTL|MOD_LSFT|MOD_LALT|MOD_LGUI, KC_F18), // Soft MAGIC KEY
-    [6]  = ACTION_MODS_TAP_KEY(MOD_LCTL|MOD_LSFT|MOD_LALT|MOD_LGUI, KC_CAPS),// Soft MAGIC KEY
+    [3]  = ACTION_MODS_KEY        ( MOD_LCTL, KC_UP),                              // Mission Control
+    [4]  = ACTION_MODS_KEY        ( MOD_LALT|MOD_LGUI, KC_L),                      // LaunchCenter
+    [5]  = ACTION_MODS_TAP_KEY    ( MOD_LCTL|MOD_LSFT|MOD_LALT|MOD_LGUI, KC_F18),  // Soft MAGIC KEY
+    [6]  = ACTION_MODS_TAP_KEY    ( MOD_LCTL|MOD_LSFT|MOD_LALT|MOD_LGUI, KC_CAPS), // Soft MAGIC KEY
 
     // Shift + ESC = ~
-    [8]  = ACTION_FUNCTION (TRICKY_ESC),
+    [8]  = ACTION_FUNCTION        ( TRICKY_ESC),
 
     // FN + ' = password layer
-    [20] = ACTION_LAYER_INVERT(PASSWD,ON_BOTH),
-    [21] = ACTION_LAYER_OFF(PASSWD,ON_PRESS),
-    [22] = ACTION_MACRO(CLEAR),
-    [23] = ACTION_MACRO(PASSWORD1),
-    [24] = ACTION_MACRO(PASSWORD2),
-    [25] = ACTION_MACRO(PASSWORD3),
+    [20] = ACTION_LAYER_INVERT    ( PASSWD,ON_BOTH),
+    [21] = ACTION_LAYER_OFF       ( PASSWD,ON_PRESS),
+    [22] = ACTION_MACRO           ( CLEAR),
+    [23] = ACTION_MACRO           ( PASSWORD1),
+    [24] = ACTION_MACRO           ( PASSWORD2),
+    [25] = ACTION_MACRO           ( PASSWORD3),
 
     // FN + ' + F1~F2 = Toggle layers
     // FN + ' + r = reboot to bootloader
-    [29] = ACTION_FUNCTION (JUMP_BOOTLOADER),
-    [30] = ACTION_FUNCTION (SET_DEFAULT_LAYER_SPCFN),
-    [31] = ACTION_FUNCTION (SET_DEFAULT_LAYER_MAC),
+    [29] = ACTION_FUNCTION        ( JUMP_BOOTLOADER),
+    [30] = ACTION_FUNCTION        ( SET_DEFAULT_LAYER_NORMAL),
+    [31] = ACTION_FUNCTION        ( SET_DEFAULT_LAYER_MAC),
 };
 
 
@@ -218,7 +218,7 @@ const action_t PROGMEM fn_actions[] = {
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
     switch (id) {
-        case CLEAR: if (record->event.pressed) {return MACRO_CLEAR;};
+        case CLEAR:     if (record->event.pressed) {return MACRO_CLEAR;};
         case PASSWORD1: if (record->event.pressed) {return MACRO_PASSWORD1;};
         case PASSWORD2: if (record->event.pressed) {return MACRO_PASSWORD2;};
         case PASSWORD3: if (record->event.pressed) {return MACRO_PASSWORD3;};
@@ -238,9 +238,9 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
                 eeconfig_write_default_layer((uint8_t)(default_layer_state));
             }
             break;
-        case SET_DEFAULT_LAYER_SPCFN:
+        case SET_DEFAULT_LAYER_NORMAL:
             if (!record->event.pressed) {
-                default_layer_xor((1UL<<SPCFN));
+                default_layer_xor((1UL<<NORMAL));
                 eeconfig_write_default_layer((uint8_t)(default_layer_state));
             }
             break;
