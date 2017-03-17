@@ -16,7 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "keymap_common.h"
-//#include "eeconfig.h"
+
 #define ____ TRNS
 
 enum keymap_layout {
@@ -153,7 +153,7 @@ const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] PROGMEM = {
     FN30,     F14 ,F15 ,FN3 ,FN4 ,____,____,MPRV,MPLY,MNXT,MUTE,VOLD,VOLU,    ____,____,____,
     FN30,F14 ,F15 ,FN3 ,FN4 ,____,____,MPRV,MPLY,MNXT,MUTE,VOLD,VOLU,____,    ____,____,____,    ____,____,____,____,
     ____,BTN2,MS_U,BTN1,WH_U,____,____,____,UP  ,____,____,____,____,____,    ____,____,____,    ____,____,____,
-    ____,MS_L,MS_D,MS_R,WH_D,____,____,LEFT,DOWN,RGHT,____,FN20,     ____,                       ____,____,____,____,
+    CAPS,MS_L,MS_D,MS_R,WH_D,____,____,LEFT,DOWN,RGHT,____,FN20,     ____,                       ____,____,____,____,
     ____,____,____,____,____,____,____,____,____,____,____,          ____,         ____,         ____,____,____,
     FN31,____,____,         BTN1,                     ____,____,____,____,    ____,____,____,    ____,     ____,____
     ),
@@ -176,9 +176,9 @@ const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] PROGMEM = {
      */
 
     [PASSWD] = KEYMAP(
-    FN21,     FN30,FN31,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,    FN21,FN21,FN21,
+    FN21,     FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,    FN21,FN21,FN21,
     FN21,FN22,FN23,FN24,FN25,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,    FN21,FN21,FN21,    FN21,FN21,FN21,FN21,
-    FN21,FN21,FN21,FN21,FN29,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,    FN21,FN21,FN21,    FN21,FN21,FN21,
+    FN21,FN30,FN31,FN21,FN29,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,    FN21,FN21,FN21,    FN21,FN21,FN21,
     FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,____,     FN21,                       FN21,FN21,FN21,FN21,
     FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,          FN21,         FN21,         FN21,FN21,FN21,
     FN21,FN21,FN21,         FN21,                     FN21,FN21,FN21,____,    FN21,FN21,FN21,    FN21,     FN21,FN21
@@ -286,39 +286,39 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
     static uint8_t tricky_esc_registered;
     switch (id) {
-	case SET_DEFAULT_LAYER_MAC:
-	    if (!record->event.pressed) {
-		default_layer_xor((1UL<<MAC));
-		eeconfig_write_default_layer((uint8_t)(default_layer_state));
-	    }
-	    break;
-	case SET_DEFAULT_LAYER_SPCFN:
-	    if (!record->event.pressed) {
-		default_layer_xor((1UL<<SPCFN));
-		eeconfig_write_default_layer((uint8_t)(default_layer_state));
-	    }
-	    break;
-	case JUMP_BOOTLOADER:
-	    if (!record->event.pressed) {
-		bootloader_jump();
-	    }
-	    break;
-	case TRICKY_ESC:
-	    if (record->event.pressed) {
-		if (get_mods() & MODS_SHIFT_MASK) {
-		    tricky_esc_registered = KC_GRV;
-		}
-		else {
-		    tricky_esc_registered = KC_ESC;
-		}
-		add_key(tricky_esc_registered);
-		send_keyboard_report();
-	    }
-	    else {
-		del_key(tricky_esc_registered);
-		send_keyboard_report();
-	    }
-	default:
-	    break;
+        case SET_DEFAULT_LAYER_MAC:
+            if (!record->event.pressed) {
+                default_layer_xor((1UL<<MAC));
+                eeconfig_write_default_layer((uint8_t)(default_layer_state));
+            }
+            break;
+        case SET_DEFAULT_LAYER_SPCFN:
+            if (!record->event.pressed) {
+                default_layer_xor((1UL<<SPCFN));
+                eeconfig_write_default_layer((uint8_t)(default_layer_state));
+            }
+            break;
+        case JUMP_BOOTLOADER:
+            if (!record->event.pressed) {
+                bootloader_jump();
+            }
+            break;
+        case TRICKY_ESC:
+            if (record->event.pressed) {
+                if (get_mods() & MODS_SHIFT_MASK) {
+                    tricky_esc_registered = KC_GRV;
+                }
+                else {
+                    tricky_esc_registered = KC_ESC;
+                }
+                add_key(tricky_esc_registered);
+                send_keyboard_report();
+            }
+            else {
+                del_key(tricky_esc_registered);
+                send_keyboard_report();
+            }
+        default:
+            break;
     }
 }
