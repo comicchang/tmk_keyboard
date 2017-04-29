@@ -284,41 +284,41 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 extern uint32_t default_layer_state ;
 void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
-    static uint8_t tricky_esc_registered;
-    switch (id) {
-	case SET_DEFAULT_LAYER_MAC:
-	    if (!record->event.pressed) {
-		default_layer_xor((1UL<<MAC));
-		eeconfig_write_default_layer((uint8_t)(default_layer_state));
-	    }
-	    break;
-	case SET_DEFAULT_LAYER_SPCFN:
-	    if (!record->event.pressed) {
-		default_layer_xor((1UL<<SPCFN));
-		eeconfig_write_default_layer((uint8_t)(default_layer_state));
-	    }
-	    break;
-	case JUMP_BOOTLOADER:
-	    if (!record->event.pressed) {
-		bootloader_jump();
-	    }
-	    break;
-	case TRICKY_ESC:
-	    if (record->event.pressed) {
-		if (get_mods() & MODS_SHIFT_MASK) {
-		    tricky_esc_registered = KC_GRV;
-		}
-		else {
-		    tricky_esc_registered = KC_ESC;
-		}
-		add_key(tricky_esc_registered);
-		send_keyboard_report();
-	    }
-	    else {
-		del_key(tricky_esc_registered);
-		send_keyboard_report();
-	    }
-	default:
-	    break;
-    }
+  static uint8_t tricky_esc_registered;
+  switch (id) {
+    case SET_DEFAULT_LAYER_MAC:
+      if (!record->event.pressed) {
+        default_layer_xor((1UL<<MAC));
+        eeconfig_write_default_layer((uint8_t)(default_layer_state));
+      }
+      break;
+    case SET_DEFAULT_LAYER_SPCFN:
+      if (!record->event.pressed) {
+        default_layer_xor((1UL<<SPCFN));
+        eeconfig_write_default_layer((uint8_t)(default_layer_state));
+      }
+      break;
+    case JUMP_BOOTLOADER:
+      if (!record->event.pressed) {
+        bootloader_jump();
+      }
+      break;
+    case TRICKY_ESC:
+      if (record->event.pressed) {
+        if (get_mods() & MODS_SHIFT_MASK) {
+          tricky_esc_registered = KC_GRV;
+        }
+        else {
+          tricky_esc_registered = KC_ESC;
+        }
+        add_key(tricky_esc_registered);
+        send_keyboard_report();
+      }
+      else {
+        del_key(tricky_esc_registered);
+        send_keyboard_report();
+      }
+    default:
+      break;
+  }
 }
