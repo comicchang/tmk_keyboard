@@ -42,7 +42,11 @@ static void LUFA_setup(void)
     wdt_disable();
 
     /* Disable clock division */
+#if (F_CPU == 8000000)
+    clock_prescale_set(clock_div_2);    // 16MHz crystal divided by 2
+#else
     clock_prescale_set(clock_div_1);
+#endif
 
     // Leonardo needs. Without this USB device is not recognized.
     USB_Disable();
@@ -75,11 +79,13 @@ int main(void)
      */
     sei();
 
+/* Some keyboards bootup quickly and cannot be initialized with this startup wait.
     // wait for startup of sendchar routine
     while (USB_DeviceState != DEVICE_STATE_Configured) ;
     if (debug_enable) {
         _delay_ms(1000);
     }
+*/
 
     debug("init: done\n");
 
