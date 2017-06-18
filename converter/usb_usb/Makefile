@@ -90,7 +90,7 @@ OPT_DEFS += -DINTERRUPT_CONTROL_ENDPOINT
 # Build Options
 #   comment out to disable the options.
 #
-BOOTMAGIC_ENABLE = yes	# Virtual DIP switch configuration(+1000)
+#BOOTMAGIC_ENABLE = yes	# Virtual DIP switch configuration(+1000)
 MOUSEKEY_ENABLE ?= yes	# Mouse keys
 EXTRAKEY_ENABLE ?= yes	# Media control and System control
 #CONSOLE_ENABLE ?= yes	# Console for debug
