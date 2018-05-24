@@ -21,7 +21,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 enum keymap_layout {
     BASE = 0,
-    NORMAL,
     MAC,
     SPACEFN,
     MOUSE,
@@ -52,35 +51,9 @@ const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] PROGMEM = {
         ESC,      F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12,      PSCR,SLCK,BRK,
         GRV, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, BSPC,     INS, HOME,PGUP,    NLCK,PSLS,PAST,PMNS,
         TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC,RBRC,BSLS,     DEL, END, PGDN,    P7,  P8,  P9,
-        CAPS,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,     ENT,                         P4,  P5,  P6,  PPLS,
+        FN5, A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,     ENT,                         P4,  P5,  P6,  PPLS,
         LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,          RSFT,          UP,           P1,  P2,  P3,
-        LCTL,LGUI,LALT,          SPC,                     RALT,RGUI, APP,FN1,      LEFT,DOWN,RGHT,    P0,       PDOT,PENT
-    ),
-
-    /* Overlay 1: default layer
-     * ,---.   ,---------------. ,---------------. ,---------------. ,-----------.
-     * |   |   |   |   |   |   | |   |   |   |   | |   |   |   |   | |   |   |   |
-     * `---'   `---------------' `---------------' `---------------' `-----------'
-     * ,-----------------------------------------------------------. ,-----------. ,---------------.
-     * |   |   |   |   |   |   |   |   |   |   |   |   |   |       | |   |   |   | |   |   |   |   |
-     * |-----------------------------------------------------------| |-----------| |---------------|
-     * |     |   |   |   |   |   |   |   |   |   |   |   |   |     | |   |   |   | |   |   |   |   |
-     * |-----------------------------------------------------------| `-----------' |-----------|   |
-     * |Hyper1|   |   |   |   |   |   |   |   |   |   |   |        |               |   |   |   |   |
-     * |-----------------------------------------------------------|     ,---.     |---------------|
-     * |        |   |   |   |   |   |   |   |   |   |   |          |     |   |     |   |   |   |   |
-     * |-----------------------------------------------------------| ,-----------. |-----------|   |
-     * |   |   |   |             SpaceFN           |   |   |   |   | |   |   |   | |       |   |   |
-     * `-----------------------------------------------------------' `-----------' `---------------'
-     */
-
-    [NORMAL] = KEYMAP(
-        ____,     ____,____,____,____,____,____,____,____,____,____,____,____,    ____,____,____,
-        ____,____,____,____,____,____,____,____,____,____,____,____,____,____,    ____,____,____,    ____,____,____,____,
-        ____,____,____,____,____,____,____,____,____,____,____,____,____,____,    ____,____,____,    ____,____,____,
-        FN6 ,____,____,____,____,____,____,____,____,____,____,____,     ____,                       ____,____,____,____,
-        ____,____,____,____,____,____,____,____,____,____,____,          ____,         ____,         ____,____,____,
-        ____,____,____,          FN0,                     ____,____,____,____,    ____,____,____,    ____,     ____,____
+        LCTL,LGUI,LALT,          FN0,                     RALT,RGUI, APP,FN1,      LEFT,DOWN,RGHT,    P0,       PDOT,PENT
     ),
 
     /* Overlay 2: MAC layout
@@ -163,7 +136,7 @@ const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] PROGMEM = {
 
     /* Overlay 5: PASSWORD
      * ,---.   ,---------------. ,---------------. ,---------------. ,-----------.
-     * |   |   |   |   |   |   | |   |   |   |   | |   |   |   |   | |   |   |   |
+     * |   |   |SPC|MAC|RST|   | |   |   |   |   | |   |   |   |   | |   |   |   |
      * `---'   `---------------' `---------------' `---------------' `-----------'
      * ,-----------------------------------------------------------. ,-----------. ,---------------.
      * |EXT|CLR|PW1|PW2|PW3|   |   |   |   |   |   |   |   |       | |   |   |   | |   |   |   |   |
@@ -179,7 +152,7 @@ const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] PROGMEM = {
      */
 
     [PASSWD] = KEYMAP(
-        FN21,     FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,    FN21,FN21,FN21,
+        FN21,     FN30,FN31,FN29,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,    FN21,FN21,FN21,
         FN21,FN22,FN23,FN24,FN25,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,    FN21,FN21,FN21,    FN21,FN21,FN21,FN21,
         FN21,FN30,FN31,FN21,FN29,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,    FN21,FN21,FN21,    FN21,FN21,FN21,
         FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,FN21,____,     FN21,                       FN21,FN21,FN21,FN21,
@@ -222,7 +195,7 @@ const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] PROGMEM = {
 enum function_id {
     TRICKY_ESC,
     DOUBLE_CTRL,
-    SET_DEFAULT_LAYER_NORMAL,
+    SET_DEFAULT_LAYER_SPACEFN,
     SET_DEFAULT_LAYER_MAC,
     JUMP_BOOTLOADER,
 };
@@ -263,7 +236,7 @@ const action_t fn_actions[] PROGMEM = {
     // FN + ' + F1~F2 = Toggle layers
     // FN + ' + r = reboot to bootloader
     [29] = ACTION_FUNCTION        ( JUMP_BOOTLOADER),
-    [30] = ACTION_FUNCTION        ( SET_DEFAULT_LAYER_NORMAL),
+    [30] = ACTION_FUNCTION        ( SET_DEFAULT_LAYER_SPACEFN),
     [31] = ACTION_FUNCTION        ( SET_DEFAULT_LAYER_MAC),
 
 };
@@ -293,13 +266,13 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
     case SET_DEFAULT_LAYER_MAC:
       if (!record->event.pressed) {
         default_layer_xor((1UL<<MAC));
-        eeconfig_write_default_layer((uint8_t)(default_layer_state));
+        //eeconfig_write_default_layer((uint8_t)(default_layer_state));
       }
       break;
-    case SET_DEFAULT_LAYER_SPCFN:
+    case SET_DEFAULT_LAYER_SPACEFN:
       if (!record->event.pressed) {
-        default_layer_xor((1UL<<SPCFN));
-        eeconfig_write_default_layer((uint8_t)(default_layer_state));
+        //default_layer_xor((1UL<<NORMAL));
+        //eeconfig_write_default_layer((uint8_t)(default_layer_state));
       }
       break;
     case JUMP_BOOTLOADER:
