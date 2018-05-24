@@ -12,6 +12,7 @@ enum keymap_layout {
     NORMAL,
     MAC,
     SPACEFN,
+    FNLAYER,
     MOUSE,
     PASSWD,
 };
@@ -35,7 +36,7 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC,RBRC,BSPC, \
         CAPS,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,     ENT,  \
         LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,     RSFT,FN1,  \
-        LCTL,LGUI,LALT,          SPC,                     RALT,RGUI,CAPS,RCTL),
+        LCTL,LGUI,LALT,          SPC,                     RALT,RGUI,CAPS,FN2),
 
     /* Overlay 1: normal Layer
      * ,-----------------------------------------------------------.
@@ -53,7 +54,7 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [NORMAL] = KEYMAP_HHKB(
         ____,____,____,____,____,____,____,____,____,____,____,____,____,____,____, \
         ____,____,____,____,____,____,____,____,____,____,____,____,____,____,      \
-        FN6 ,____,____,____,____,____,____,____,____,____,____,____,     ____,      \
+        FN7 ,____,____,____,____,____,____,____,____,____,____,____,     ____,      \
         ____,____,____,____,____,____,____,____,____,____,____,     ____,____,      \
         ____,____,____,          FN0,                     ____,____,____,____),
 
@@ -74,7 +75,7 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC] = KEYMAP_HHKB(
         ____,____,____,____,____,____,____,____,____,____,____,____,____,____,____, \
         ____,____,____,____,____,____,____,____,____,____,____,____,____,____,      \
-        FN5,____,____,____,____,____,____,____,____,____,____,____,     ____,      \
+        FN6,____,____,____,____,____,____,____,____,____,____,____,     ____,      \
         ____,____,____,____,____,____,____,____,____,____,____,     ____,____,      \
         ____,LALT,LGUI,          ____,                    RGUI,RALT,____,____),
 
@@ -96,12 +97,32 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         GRV, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, BSPC,BSPC, \
         ____,____,PGUP,____,____,____,____,____,____,PSCR,SLCK,PAUS,INS, DEL,  \
         ____,HOME,PGDN,END, ____,____,LEFT,DOWN,UP,  RGHT,____,____,     PENT, \
-        ____,____,____,____,____,SPC, GRV, FN2, ____,____,____,     ____,____, \
+        ____,____,____,____,____,SPC, GRV, FN3, ____,____,____,     ____,____, \
+        ____,____,____,          ____,                    ____,____,____,____),
+
+    /* Overlay 4: FN Layer
+     * ,-----------------------------------------------------------.
+     * |`  | F1| F2| F3| F4| F5| F6| F7| F8| F9|F10|F11|F12|Bsp|Bsp|
+     * |-----------------------------------------------------------|
+     * |     |   |PgU|   |   |   |   |   |   |Psc|Slk|Pau|Ins  |Del|
+     * |-----------------------------------------------------------|
+     * |      |Hom|PgD|End|   |   |Lef|Dow|Up |Rig|   |   |Enter   |
+     * |-----------------------------------------------------------|
+     * |        |   |   |   |   |Spc|`  |~  |   |   |   |     |    |
+     * |-----------------------------------------------------------|
+     * |    |    |    |                        |    |    |    |    |
+     * `-----------------------------------------------------------'
+     */
+    [FNLAYER] = KEYMAP_HHKB(
+        GRV, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, BSPC,BSPC, \
+        ____,____,  UP,____,____,____,____,____,____,PSCR,SLCK,PAUS,INS, DEL,  \
+        ____,LEFT,DOWN,RGHT,____,____,LEFT,DOWN,UP,  RGHT,____,____,     PENT, \
+        ____,____,____,____,____,SPC, GRV, FN3, ____,____,____,     ____,____, \
         ____,____,____,          ____,                    ____,____,____,____),
 
     /* Overlay 4: MouseKey
      * ,-----------------------------------------------------------.
-     * |CLR|F14|F15|FN3|FN4|   |   |PRV|PLY|NXT|Mut|VoD|VlU|   |   |
+     * |CLR|F14|F15|FN4|FN5|   |   |PRV|PLY|NXT|Mut|VoD|VlU|   |   |
      * |-----------------------------------------------------------|
      * |     |Mb2|MUp|Mb1|WUp|   |   |   | Up|   |   |   |   |     |
      * |-----------------------------------------------------------|
@@ -113,7 +134,7 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------'
      */
     [MOUSE] = KEYMAP_HHKB(
-        FN30,F14, F15, FN3, FN4, ____,____,MPRV,MPLY,MNXT,MUTE,VOLD,VOLU,____,____, \
+        FN30,F14, F15, FN4, FN5, ____,____,MPRV,MPLY,MNXT,MUTE,VOLD,VOLU,____,____, \
         ____,BTN2,MS_U,BTN1,WH_U,____,____,____,UP,  ____,____,____,____,____,      \
         CAPS,MS_L,MS_D,MS_R,WH_D,____,____,LEFT,DOWN,RGHT,____,FN20,     ____,      \
         ____,____,____,____,____,____,____,____,____,____,____,     ____,____,      \
@@ -184,13 +205,15 @@ const action_t PROGMEM fn_actions[] = {
 
     [0]  = ACTION_LAYER_TAP_KEY   ( SPACEFN, KC_SPACE), // SPACE LAYER
     [1]  = ACTION_LAYER_MOMENTARY ( MOUSE),             // MOUSE LAYER
-    [2]  = ACTION_MODS_KEY        ( MOD_LSFT, KC_GRV),  // tilde
+    [2]  = ACTION_LAYER_MOMENTARY ( FNLAYER),           // FN LAYER
+
+    [3]  = ACTION_MODS_KEY        ( MOD_LSFT, KC_GRV),  // tilde
 
     // Media keys in mousekey layer
-    [3]  = ACTION_MODS_KEY        ( MOD_LCTL, KC_UP),                              // Mission Control
-    [4]  = ACTION_MODS_KEY        ( MOD_LALT|MOD_LGUI, KC_L),                      // LaunchCenter
-    [5]  = ACTION_MODS_TAP_KEY    ( MOD_LCTL|MOD_LSFT|MOD_LALT|MOD_LGUI, KC_F18),  // Soft MAGIC KEY
-    [6]  = ACTION_MODS_TAP_KEY    ( MOD_LCTL|MOD_LSFT|MOD_LALT|MOD_LGUI, KC_CAPS), // Soft MAGIC KEY
+    [4]  = ACTION_MODS_KEY        ( MOD_LCTL, KC_UP),                              // Mission Control
+    [5]  = ACTION_MODS_KEY        ( MOD_LALT|MOD_LGUI, KC_L),                      // LaunchCenter
+    [6]  = ACTION_MODS_TAP_KEY    ( MOD_LCTL|MOD_LSFT|MOD_LALT|MOD_LGUI, KC_F18),  // Soft MAGIC KEY
+    [7]  = ACTION_MODS_TAP_KEY    ( MOD_LCTL|MOD_LSFT|MOD_LALT|MOD_LGUI, KC_CAPS), // Soft MAGIC KEY
 
     // Shift + ESC = ~
     [8]  = ACTION_FUNCTION        ( TRICKY_ESC),
