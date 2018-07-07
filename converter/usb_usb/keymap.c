@@ -126,8 +126,8 @@ const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] PROGMEM = {
      */
 
     [MOUSE] = KEYMAP(
-            FN30,     F14 ,F15 ,FN3 ,FN4 ,____,____,MPRV,MPLY,MNXT,MUTE,VOLD,VOLU,    ____,____,____,
-            FN30,F14 ,F15 ,FN3 ,FN4 ,____,____,MPRV,MPLY,MNXT,MUTE,VOLD,VOLU,____,    ____,____,____,    ____,____,____,____,
+        FN30,     F14 ,F15 ,FN3 ,FN4 ,____,____,MPRV,MPLY,MNXT,MUTE,VOLD,VOLU,    ____,____,____,
+        FN30,F14 ,F15 ,FN3 ,FN4 ,____,____,MPRV,MPLY,MNXT,MUTE,VOLD,VOLU,____,    ____,____,____,    ____,____,____,____,
         ____,BTN2,MS_U,BTN1,WH_U,____,____,____,UP  ,____,____,____,____,____,    ____,____,____,    ____,____,____,
         CAPS,MS_L,MS_D,MS_R,WH_D,____,____,LEFT,DOWN,RGHT,____,FN20,     ____,                       ____,____,____,____,
         ____,____,____,____,____,____,____,____,____,____,____,          ____,         ____,         ____,____,____,
