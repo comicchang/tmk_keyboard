@@ -1,21 +1,24 @@
 #include "parser.h"
 #include "usb_hid.h"
 
-#include "debug.h"
+#include "print.h"
 
 
-void KBDReportParser::Parse(HID *hid, bool is_rpt_id, uint8_t len, uint8_t *buf)
+void KBDReportParser::Parse(USBHID *hid, bool is_rpt_id, uint8_t len, uint8_t *buf)
 {
-    dprintf("input %d:", hid->GetAddress());
+    xprintf("input %d:", hid->GetAddress());
     for (uint8_t i = 0; i < len; i++) {
-        dprintf(" %02X", buf[i]);
+        xprintf(" %02X", buf[i]);
     }
-    dprint("\r\n");
+    xprintf("\r\n");
 
-    // ignore Cherry 0101010101010101 bug report
+    // Rollover error
+    // Cherry: 0101010101010101
     // https://geekhack.org/index.php?topic=69169.msg2638223#msg2638223
-    if (buf[1] == 0x01) {
-       dprint("Cherry bug: ignored\r\n");
+    // Apple:  0000010101010101
+    // https://geekhack.org/index.php?topic=69169.msg2760969#msg2760969
+    if (buf[2] == 0x01) {
+       xprintf("Rollover error: ignored\r\n");
        return;
     }
 

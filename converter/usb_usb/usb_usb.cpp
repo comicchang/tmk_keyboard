@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // USB HID host
 #include "Usb.h"
 #include "usbhub.h"
-#include "hid.h"
+#include "usbhid.h"
 #include "hidboot.h"
 #include "parser.h"
 
@@ -34,6 +34,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "led.h"
 #include "host.h"
 #include "keyboard.h"
+
+#include "hook.h"
+#include "suspend.h"
+#include "lufa.h"
 
 
 /* KEY CODE to Matrix
@@ -71,22 +75,23 @@ static bool matrix_is_mod =false;
  * This supports two cascaded hubs and four keyboards
  */
 USB usb_host;
-USBHub hub1(&usb_host);
-USBHub hub2(&usb_host);
-HIDBoot<HID_PROTOCOL_KEYBOARD>    kbd1(&usb_host);
-HIDBoot<HID_PROTOCOL_KEYBOARD>    kbd2(&usb_host);
-HIDBoot<HID_PROTOCOL_KEYBOARD>    kbd3(&usb_host);
-HIDBoot<HID_PROTOCOL_KEYBOARD>    kbd4(&usb_host);
+HIDBoot<USB_HID_PROTOCOL_KEYBOARD>    kbd1(&usb_host);
+HIDBoot<USB_HID_PROTOCOL_KEYBOARD>    kbd2(&usb_host);
+HIDBoot<USB_HID_PROTOCOL_KEYBOARD>    kbd3(&usb_host);
+HIDBoot<USB_HID_PROTOCOL_KEYBOARD>    kbd4(&usb_host);
 KBDReportParser kbd_parser1;
 KBDReportParser kbd_parser2;
 KBDReportParser kbd_parser3;
 KBDReportParser kbd_parser4;
+USBHub hub1(&usb_host);
+USBHub hub2(&usb_host);
 
 
 uint8_t matrix_rows(void) { return MATRIX_ROWS; }
 uint8_t matrix_cols(void) { return MATRIX_COLS; }
 bool matrix_has_ghost(void) { return false; }
 void matrix_init(void) {
+    debug_enable = true;
     // USB Host Shield setup
     usb_host.Init();
     kbd1.SetReportParser(0, (HIDReportParser*)&kbd_parser1);
@@ -135,12 +140,6 @@ uint8_t matrix_scan(void) {
         or_report(kbd_parser4.report);
 
         matrix_is_mod = true;
-
-        dprintf("state:  %02X %02X", keyboard_report.mods, keyboard_report.reserved);
-        for (uint8_t i = 0; i < KEYBOARD_REPORT_KEYS; i++) {
-            dprintf(" %02X", keyboard_report.keys[i]);
-        }
-        dprint("\r\n");
     } else {
         matrix_is_mod = false;
     }
@@ -150,17 +149,17 @@ uint8_t matrix_scan(void) {
     usb_host.Task();
     timer = timer_elapsed(timer);
     if (timer > 100) {
-        dprintf("host.Task: %d\n", timer);
+        xprintf("host.Task: %d\n", timer);
     }
 
     static uint8_t usb_state = 0;
     if (usb_state != usb_host.getUsbTaskState()) {
         usb_state = usb_host.getUsbTaskState();
-        dprintf("usb_state: %02X\n", usb_state);
+        xprintf("usb_state: %02X\n", usb_state);
 
         // restore LED state when keyboard comes up
         if (usb_state == USB_STATE_RUNNING) {
-            dprintf("speed: %s\n", usb_host.getVbusState()==FSHOST ? "full" : "low");
+            xprintf("speed: %s\n", usb_host.getVbusState()==FSHOST ? "full" : "low");
             keyboard_set_leds(host_keyboard_leds());
         }
     }
@@ -217,12 +216,6 @@ uint8_t matrix_key_count(void) {
 }
 
 void matrix_print(void) {
-    print("\nr/c 0123456789ABCDEF\n");
-    for (uint8_t row = 0; row < matrix_rows(); row++) {
-        xprintf("%02d: ", row);
-        print_bin_reverse16(matrix_get_row(row));
-        print("\n");
-    }
 }
 
 void led_set(uint8_t usb_led)
@@ -231,4 +224,29 @@ void led_set(uint8_t usb_led)
     if (kbd2.isReady()) kbd2.SetReport(0, 0, 2, 0, 1, &usb_led);
     if (kbd3.isReady()) kbd3.SetReport(0, 0, 2, 0, 1, &usb_led);
     if (kbd4.isReady()) kbd4.SetReport(0, 0, 2, 0, 1, &usb_led);
+}
+
+// We need to keep doing UHS2 USB::Task() to initialize keyboard
+// even before USB is not configured.
+void hook_usb_startup_wait_loop(void)
+{
+    matrix_scan();
+}
+
+// We need to keep doing UHS2 USB::Task() to initialize keyboard
+// even during USB bus is suspended and remote wakeup is not enabled yet on LUFA side.
+// This situation can happen just after pluging converter into USB port.
+void hook_usb_suspend_loop(void)
+{
+#ifndef LUFA_DEBUG_UART
+    // This corrupts debug print when suspend
+    suspend_power_down();
+#endif
+    if (USB_Device_RemoteWakeupEnabled) {
+        if (suspend_wakeup_condition()) {
+            USB_Device_SendRemoteWakeup();
+        }
+    } else {
+        matrix_scan();
+    }
 }

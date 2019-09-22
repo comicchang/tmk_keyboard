@@ -19,8 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define CONFIG_H
 
 #define VENDOR_ID       0xFEED
-#define PRODUCT_ID      0x9898
-#define DEVICE_VER      0x0100
+#define PRODUCT_ID      0x9801
+#define DEVICE_VER      0x0101
 #define MANUFACTURER    t.m.k.
 #define PRODUCT         PC98 keyboard converter
 #define DESCRIPTION     converts PC98 keyboard protocol into USB
@@ -32,7 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* key combination for command */
 #define IS_COMMAND()    ( \
-    keyboard_report->keys[0] == KC_STOP || \
+    matrix_is_on(12, 0) || /* STOP */ \
     keyboard_report->mods == (MOD_BIT(KC_LALT) | MOD_BIT(KC_RALT)) \
 )
 

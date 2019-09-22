@@ -28,6 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "action.h"
 #include "hook.h"
 #include "wait.h"
+#include "bootloader.h"
 
 #ifdef DEBUG_ACTION
 #include "debug.h"
@@ -58,6 +59,8 @@ void action_exec(keyevent_t event)
 
 void process_action(keyrecord_t *record)
 {
+    if (hook_process_action(record)) return;
+
     keyevent_t event = record->event;
 #ifndef NO_ACTION_TAPPING
     uint8_t tap_count = record->tap.count;
@@ -339,6 +342,15 @@ void process_action(keyrecord_t *record)
             break;
 #endif
         case ACT_COMMAND:
+            switch (action.command.id) {
+                case COMMAND_BOOTLOADER:
+                    if (event.pressed) {
+                        clear_keyboard();
+                        wait_ms(50);
+                        bootloader_jump();
+                    }
+                    break;
+            }
             break;
 #ifndef NO_ACTION_FUNCTION
         case ACT_FUNCTION:

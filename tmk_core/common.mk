@@ -50,8 +50,20 @@ endif
 ifeq (yes,$(strip $(CONSOLE_ENABLE)))
     OPT_DEFS += -DCONSOLE_ENABLE
 else
-    OPT_DEFS += -DNO_PRINT
+    # Remove print functions when console is disabled and
+    # no other print method like UART is available
+    ifneq (yes, $(strip $(DEBUG_PRINT_AVAILABLE)))
+	OPT_DEFS += -DNO_PRINT
+	OPT_DEFS += -DNO_DEBUG
+    endif
+endif
+
+ifeq (yes,$(strip $(NO_DEBUG)))
     OPT_DEFS += -DNO_DEBUG
+endif
+
+ifeq (yes,$(strip $(NO_PRINT)))
+    OPT_DEFS += -DNO_PRINT
 endif
 
 ifeq (yes,$(strip $(COMMAND_ENABLE)))
@@ -95,8 +107,8 @@ ifeq (yes,$(strip $(KEYMAP_SECTION_ENABLE)))
 endif
 
 # Version string
-VERSION := $(shell (git describe --always --dirty || echo 'unknown') 2> /dev/null)
-OPT_DEFS += -DVERSION=$(VERSION)
+TMK_VERSION := $(shell (git describe --always --dirty=+ || echo 'unknown') 2> /dev/null)
+OPT_DEFS += -DTMK_VERSION=$(TMK_VERSION)
 
 
 # Search Path
