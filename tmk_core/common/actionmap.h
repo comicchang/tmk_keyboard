@@ -1,5 +1,5 @@
 /*
-Copyright 2015 Jun Wako <wakojun@gmail.com>
+Copyright 2015,2020 Jun Wako <wakojun@gmail.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -283,6 +283,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define AC_WWW_STOP		ACTION_USAGE_CONSUMER(APPCONTROL_STOP)
 #define AC_WWW_REFRESH		ACTION_USAGE_CONSUMER(APPCONTROL_REFRESH)
 #define AC_WWW_FAVORITES	ACTION_USAGE_CONSUMER(APPCONTROL_BOOKMARKS)
+#define AC_BRIGHTNESS_INC	ACTION_USAGE_CONSUMER(BRIGHTNESS_INCREMENT)
+#define AC_BRIGHTNESS_DEC	ACTION_USAGE_CONSUMER(BRIGHTNESS_DECREMENT)
 
 /* Mousekey */
 #define AC_MS_UP		ACTION_MOUSEKEY(KC_MS_UP)
@@ -364,6 +366,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define AC_P8  			ACTION_KEY(KC_KP_8)
 #define AC_P9  			ACTION_KEY(KC_KP_9)
 #define AC_P0  			ACTION_KEY(KC_KP_0)
+#define AC_P00  		ACTION_KEY(KC_KP_00)
+#define AC_P000  		ACTION_KEY(KC_KP_000)
 #define AC_PDOT			ACTION_KEY(KC_KP_DOT)
 #define AC_PCMM			ACTION_KEY(KC_KP_COMMA)
 #define AC_PSLS			ACTION_KEY(KC_KP_SLASH)
@@ -415,6 +419,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define AC_WSTP			ACTION_USAGE_CONSUMER(APPCONTROL_STOP)
 #define AC_WREF			ACTION_USAGE_CONSUMER(APPCONTROL_REFRESH)
 #define AC_WFAV			ACTION_USAGE_CONSUMER(APPCONTROL_BOOKMARKS)
+#define AC_BRTI         	ACTION_USAGE_CONSUMER(BRIGHTNESS_INCREMENT)
+#define AC_BRTD         	ACTION_USAGE_CONSUMER(BRIGHTNESS_DECREMENT)
 /* Transparent */
 #define AC_TRNS			ACTION_KEY(KC_TRANSPARENT)
 
