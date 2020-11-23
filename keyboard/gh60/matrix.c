@@ -101,6 +101,7 @@ matrix_row_t matrix_get_row(uint8_t row)
  * pin:                                 B7                      (Rev.B)
  * pin: F0  F1  E6  C7  C6  B7  D4  B1  B0  B5  B4  D7  D6  B3  (Rev.CHN)
  * pin: F0  F1  E6  C7  C6  B7  D4  B0  B1  B5  B4  D7  D6  B3  (Rev.CNY)
+ * pin: F1  F0  E6  C7  C6  B0  D4  B1  B7  B5  B4  D7  D6  B3  (Rev.AMJ)
  */
 static void  init_cols(void)
 {
@@ -113,7 +114,7 @@ static void  init_cols(void)
     PORTD |=  (1<<7 | 1<<6 | 1<<4);
     DDRC  &= ~(1<<7 | 1<<6);
     PORTC |=  (1<<7 | 1<<6);
-#if defined(GH60_REV_CHN) || defined(GH60_REV_CNY)
+#if defined(GH60_REV_CHN) || defined(GH60_REV_CNY) || defined(GH60_REV_AMJ)
     DDRB  &= ~(1<<PB7 | 1<<PB5 | 1<<PB4 | 1<<PB3 | 1<<PB1 | 1<<PB0);
     PORTB |=  (1<<PB7 | 1<<PB5 | 1<<PB4 | 1<<PB3 | 1<<PB1 | 1<<PB0);
 #else
@@ -154,6 +155,21 @@ static matrix_row_t read_cols(void)
            (PIND&(1<<PD7) ? 0 : (1<<11)) |
            (PIND&(1<<PD6) ? 0 : (1<<12)) |
            (PINB&(1<<PB3) ? 0 : (1<<13));
+#elif defined(GH60_REV_AMJ)
+    return (PINF&(1<<PF1) ? 0 : (1<<0)) |
+           (PINF&(1<<PF0) ? 0 : (1<<1)) |
+           (PINE&(1<<PE6) ? 0 : (1<<2)) |
+           (PINC&(1<<PC7) ? 0 : (1<<3)) |
+           (PINC&(1<<PC6) ? 0 : (1<<4)) |
+           (PINB&(1<<PB0) ? 0 : (1<<5)) |
+           (PIND&(1<<PD4) ? 0 : (1<<6)) |
+           (PINB&(1<<PB1) ? 0 : (1<<7)) |
+           (PINB&(1<<PB7) ? 0 : (1<<8)) |
+           (PINB&(1<<PB5) ? 0 : (1<<9)) |
+           (PINB&(1<<PB4) ? 0 : (1<<10)) |
+           (PIND&(1<<PD7) ? 0 : (1<<11)) |
+           (PIND&(1<<PD6) ? 0 : (1<<12)) |
+           (PINB&(1<<PB3) ? 0 : (1<<13));
 #else
     return (PINF&(1<<0) ? 0 : (1<<0)) |
            (PINF&(1<<1) ? 0 : (1<<1)) |
@@ -175,17 +191,49 @@ static matrix_row_t read_cols(void)
 /* Row pin configuration
  * row: 0   1   2   3   4
  * pin: D0  D1  D2  D3  D5
+ * pin: F7  F6  F5  F4  D5 //AMJ60
  */
 static void unselect_rows(void)
 {
     // Hi-Z(DDR:0, PORT:0) to unselect
+#if defined(GH60_REV_AMJ)
+    DDRD  &= ~0b00100000;
+    PORTD &= ~0b00100000;
+    DDRF  &= ~0b11110000;
+    PORTF &= ~0b11110000;
+#else
     DDRD  &= ~0b00101111;
     PORTD &= ~0b00101111;
+#endif
 }
 
 static void select_row(uint8_t row)
 {
     // Output low(DDR:1, PORT:0) to select
+#if defined(GH60_REV_AMJ)
+    switch (row) {
+        case 0:
+            DDRF  |= (1<<7);
+            PORTF &= ~(1<<7);
+            break;
+        case 1:
+            DDRF  |= (1<<6);
+            PORTF &= ~(1<<6);
+            break;
+        case 2:
+            DDRF  |= (1<<5);
+            PORTF &= ~(1<<5);
+            break;
+        case 3:
+            DDRF  |= (1<<4);
+            PORTF &= ~(1<<4);
+            break;
+        case 4:
+            DDRD  |= (1<<5);
+            PORTD &= ~(1<<5);
+            break;
+    }
+#else
     switch (row) {
         case 0:
             DDRD  |= (1<<0);
@@ -208,4 +256,5 @@ static void select_row(uint8_t row)
             PORTD &= ~(1<<5);
             break;
     }
+#endif
 }

@@ -9,6 +9,7 @@ DIY compact keyboard designed and run by komar007 and Geekhack community.
 - [Prototyping](http://geekhack.org/index.php?topic=34959.0)
 - [Rev.A PCB test](http://geekhack.org/index.php?topic=37570.0)
 - [Rev.B PCB test](http://geekhack.org/index.php?topic=50685.0)
+- [Rev.AMJ PCB](https://geekhack.org/index.php?topic=77636.0)
 - [Group buy](http://geekhack.org/index.php?topic=41464.0)
 
 
@@ -25,7 +26,7 @@ Several version of keymap are available in advance but you are recommended to de
 
 To build firmware binary hex file with a certain keymap just do `make` with `KEYMAP` option like:
 
-    $ make KEYMAP=[poker|poker_set|poker_bit|plain|hasu|spacefn|hhkb|<name>]
+    $ make KEYMAP=[poker|poker_set|poker_bit|plain|hasu|spacefn|hhkb|<name>] REV=[<none>|CNH|CHY|AMJ]
 
 
 ### 1  Poker
