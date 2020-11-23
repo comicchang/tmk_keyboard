@@ -1,0 +1,4 @@
+TARGET = ibmpc_usb_at90usb1286
+MCU = at90usb1286
+
+include Makefile

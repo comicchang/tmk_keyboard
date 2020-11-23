@@ -1,5 +1,5 @@
 /*
-Copyright 2011,2012 Jun Wako <wakojun@gmail.com>
+Copyright 2011,2012,2020 Jun Wako <wakojun@gmail.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define IS_SPECIAL(code)         ((0xA5 <= (code) && (code) <= 0xDF) || (0xE8 <= (code) && (code) <= 0xFF))
 #define IS_SYSTEM(code)          (KC_PWR       <= (code) && (code) <= KC_WAKE)
-#define IS_CONSUMER(code)        (KC_MUTE      <= (code) && (code) <= KC_WFAV)
+#define IS_CONSUMER(code)        (KC_MUTE      <= (code) && (code) <= KC_BRIGHTNESS_DEC)
 #define IS_FN(code)              (KC_FN0       <= (code) && (code) <= KC_FN31)
 #define IS_MOUSEKEY(code)        (KC_MS_UP     <= (code) && (code) <= KC_MS_ACCEL2)
 #define IS_MOUSEKEY_MOVE(code)   (KC_MS_UP     <= (code) && (code) <= KC_MS_RIGHT)
@@ -116,6 +116,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KC_P8   KC_KP_8
 #define KC_P9   KC_KP_9
 #define KC_P0   KC_KP_0
+#define KC_P00  KC_KP_00
+#define KC_P000 KC_KP_000
 #define KC_PDOT KC_KP_DOT
 #define KC_PCMM KC_KP_COMMA
 #define KC_PSLS KC_KP_SLASH
@@ -172,6 +174,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KC_WSTP KC_WWW_STOP
 #define KC_WREF KC_WWW_REFRESH
 #define KC_WFAV KC_WWW_FAVORITES
+#define KC_BRTI KC_BRIGHTNESS_INC
+#define KC_BRTD KC_BRIGHTNESS_DEC
 /* Jump to bootloader */
 #define KC_BTLD KC_BOOTLOADER
 /* Transparent */
@@ -436,7 +440,9 @@ enum internal_special_keycodes {
     KC_WWW_FORWARD,
     KC_WWW_STOP,
     KC_WWW_REFRESH,
-    KC_WWW_FAVORITES,    /* 0xBC */
+    KC_WWW_FAVORITES,
+    KC_BRIGHTNESS_INC,
+    KC_BRIGHTNESS_DEC,  /* 0xBE */
 
     /* Jump to bootloader */
     KC_BOOTLOADER       = 0xBF,

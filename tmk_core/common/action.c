@@ -1,5 +1,5 @@
 /*
-Copyright 2012,2013 Jun Wako <wakojun@gmail.com>
+Copyright 2012,2013,2020 Jun Wako <wakojun@gmail.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -163,6 +163,13 @@ void process_action(keyrecord_t *record)
                                 } else {
                                     dprint("MODS_TAP: Tap: register_code\n");
                                     register_code(action.key.code);
+
+                                    // Delay for MacOS #659
+                                    if (action.key.code == KC_CAPSLOCK ||
+                                            action.key.code == KC_NUMLOCK ||
+                                            action.key.code == KC_SCROLLLOCK) {
+                                        wait_ms(100);
+                                    }
                                 }
                             } else {
                                 dprint("MODS_TAP: No tap: add_mods\n");
@@ -294,6 +301,13 @@ void process_action(keyrecord_t *record)
                         if (tap_count > 0) {
                             dprint("KEYMAP_TAP_KEY: Tap: register_code\n");
                             register_code(action.layer_tap.code);
+
+                            // Delay for MacOS #659
+                            if (action.layer_tap.code == KC_CAPSLOCK ||
+                                    action.layer_tap.code == KC_NUMLOCK ||
+                                    action.layer_tap.code == KC_SCROLLLOCK) {
+                                wait_ms(100);
+                            }
                         } else {
                             dprint("KEYMAP_TAP_KEY: No tap: On on press\n");
                             layer_on(action.layer_tap.val);
@@ -375,37 +389,28 @@ void register_code(uint8_t code)
     }
 
 #ifdef LOCKING_SUPPORT_ENABLE
-    else if (KC_LOCKING_CAPS == code) {
+    else if (code == KC_LOCKING_CAPS ||
+                code == KC_LOCKING_NUM ||
+                code == KC_LOCKING_SCROLL) {
+        uint8_t c, l;
+        if (code == KC_LOCKING_CAPS) {
+            c = KC_CAPSLOCK;
+            l = 1<<USB_LED_CAPS_LOCK;
+        } else if (code == KC_LOCKING_NUM) {
+            c = KC_NUMLOCK;
+            l = 1<<USB_LED_NUM_LOCK;
+        } else if (code == KC_LOCKING_SCROLL) {
+            c = KC_SCROLLLOCK;
+            l = 1<<USB_LED_SCROLL_LOCK;
+        }
 #ifdef LOCKING_RESYNC_ENABLE
-        // Resync: ignore if caps lock already is on
-        if (host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK)) return;
+        // Resync: ignore if lock indicator is already on
+        if (host_keyboard_leds() & l) return;
 #endif
-        add_key(KC_CAPSLOCK);
+        add_key(c);
         send_keyboard_report();
-        wait_ms(100);
-        del_key(KC_CAPSLOCK);
-        send_keyboard_report();
-    }
-
-    else if (KC_LOCKING_NUM == code) {
-#ifdef LOCKING_RESYNC_ENABLE
-        if (host_keyboard_leds() & (1<<USB_LED_NUM_LOCK)) return;
-#endif
-        add_key(KC_NUMLOCK);
-        send_keyboard_report();
-        wait_ms(100);
-        del_key(KC_NUMLOCK);
-        send_keyboard_report();
-    }
-
-    else if (KC_LOCKING_SCROLL == code) {
-#ifdef LOCKING_RESYNC_ENABLE
-        if (host_keyboard_leds() & (1<<USB_LED_SCROLL_LOCK)) return;
-#endif
-        add_key(KC_SCROLLLOCK);
-        send_keyboard_report();
-        wait_ms(100);
-        del_key(KC_SCROLLLOCK);
+        wait_ms(100); // Delay for MacOS #390
+        del_key(c);
         send_keyboard_report();
     }
 #endif
@@ -453,37 +458,28 @@ void unregister_code(uint8_t code)
     }
 
 #ifdef LOCKING_SUPPORT_ENABLE
-    else if (KC_LOCKING_CAPS == code) {
+    else if (code == KC_LOCKING_CAPS ||
+                code == KC_LOCKING_NUM ||
+                code == KC_LOCKING_SCROLL) {
+        uint8_t c, l;
+        if (code == KC_LOCKING_CAPS) {
+            c = KC_CAPSLOCK;
+            l = 1<<USB_LED_CAPS_LOCK;
+        } else if (code == KC_LOCKING_NUM) {
+            c = KC_NUMLOCK;
+            l = 1<<USB_LED_NUM_LOCK;
+        } else if (code == KC_LOCKING_SCROLL) {
+            c = KC_SCROLLLOCK;
+            l = 1<<USB_LED_SCROLL_LOCK;
+        }
 #ifdef LOCKING_RESYNC_ENABLE
-        // Resync: ignore if caps lock already is off
-        if (!(host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK))) return;
+        // Resync: ignore if lock indicator is already off
+        if (!(host_keyboard_leds() & l)) return;
 #endif
-        add_key(KC_CAPSLOCK);
+        add_key(c);
         send_keyboard_report();
-        wait_ms(100);
-        del_key(KC_CAPSLOCK);
-        send_keyboard_report();
-    }
-
-    else if (KC_LOCKING_NUM == code) {
-#ifdef LOCKING_RESYNC_ENABLE
-        if (!(host_keyboard_leds() & (1<<USB_LED_NUM_LOCK))) return;
-#endif
-        add_key(KC_NUMLOCK);
-        send_keyboard_report();
-        wait_ms(100);
-        del_key(KC_NUMLOCK);
-        send_keyboard_report();
-    }
-
-    else if (KC_LOCKING_SCROLL == code) {
-#ifdef LOCKING_RESYNC_ENABLE
-        if (!(host_keyboard_leds() & (1<<USB_LED_SCROLL_LOCK))) return;
-#endif
-        add_key(KC_SCROLLLOCK);
-        send_keyboard_report();
-        wait_ms(100);
-        del_key(KC_SCROLLLOCK);
+        wait_ms(100); // Delay for MacOS #390
+        del_key(c);
         send_keyboard_report();
     }
 #endif
