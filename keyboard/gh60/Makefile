@@ -109,6 +109,11 @@ OPT_DEFS += -DINTERRUPT_CONTROL_ENDPOINT
 #   USBaspLoader     2048
 OPT_DEFS += -DBOOTLOADER_SIZE=4096
 
+# PCB Revision
+ifdef REV
+    OPT_DEFS += -DGH60_REV_$(REV)
+endif
+
 
 # Build Options
 #   comment out to disable the options.
