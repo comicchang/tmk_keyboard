@@ -55,6 +55,9 @@ static uint16_t read_keyboard_id(void)
     uint16_t id = 0;
     int16_t  code = 0;
 
+    // temporary fix Z-150 AT should response with ID
+    if (ibmpc_protocol == IBMPC_PROTOCOL_AT_Z150) return 0xFFFD;
+
     // Disable
     //code = ibmpc_host_send(0xF5);
 
@@ -171,6 +174,7 @@ uint8_t matrix_scan(void)
             xprintf("I%u ", timer_read());
             keyboard_kind = NONE;
             keyboard_id = 0x0000;
+            current_protocol = 0;
 
             matrix_clear();
             clear_keyboard();
@@ -276,6 +280,8 @@ uint8_t matrix_scan(void)
                 keyboard_kind = PC_XT;
             } else if (0xFFFE == keyboard_id) {     // CodeSet2 PS/2 fails to response?
                 keyboard_kind = PC_AT;
+            } else if (0xFFFD == keyboard_id) {     // Zenith Z-150 AT
+                keyboard_kind = PC_AT_Z150;
             } else if (0x00FF == keyboard_id) {     // Mouse is not supported
                 xprintf("Mouse: not supported\n");
                 keyboard_kind = NONE;
@@ -306,7 +312,7 @@ uint8_t matrix_scan(void)
                 keyboard_kind = PC_AT;
             }
 
-            xprintf("\nID:%04X(%d) ", keyboard_id, keyboard_kind);
+            xprintf("\nID:%04X(%s) ", keyboard_id, KEYBOARD_KIND_STR(keyboard_kind));
 
             state = SETUP;
             break;
@@ -317,6 +323,9 @@ uint8_t matrix_scan(void)
                     break;
                 case PC_AT:
                     led_set(host_keyboard_leds());
+                    break;
+                case PC_AT_Z150:
+                    // TODO: do not set indicators temporarily for debug
                     break;
                 case PC_TERMINAL:
                     // Set all keys to make/break type
@@ -355,6 +364,7 @@ uint8_t matrix_scan(void)
                         if (process_cs1(code) == -1) state = INIT;
                         break;
                     case PC_AT:
+                    case PC_AT_Z150:
                         if (process_cs2(code) == -1) state = INIT;
                         break;
                     case PC_TERMINAL:
@@ -522,7 +532,7 @@ static int8_t process_cs1(uint8_t code)
     static enum {
         INIT,
         E0,
-        // Pause: E1 1D 45, E1 9D C5 [a] (TODO: test)
+        // Pause: E1 1D 45, E1 9D C5 [a]
         E1,
         E1_1D,
         E1_9D,
@@ -579,7 +589,8 @@ static int8_t process_cs1(uint8_t code)
         case E1_1D:
             switch (code) {
                 case 0x45:
-                    matrix_make(0x55);
+                    matrix_make(0x55); // Pause
+                    state = INIT;
                     break;
                 default:
                     state = INIT;
@@ -588,8 +599,9 @@ static int8_t process_cs1(uint8_t code)
             break;
         case E1_9D:
             switch (code) {
-                case 0x45:
-                    matrix_break(0x55);
+                case 0xC5:
+                    matrix_break(0x55); // Pause
+                    state = INIT;
                     break;
                 default:
                     state = INIT;
