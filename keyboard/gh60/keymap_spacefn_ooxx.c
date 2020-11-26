@@ -113,12 +113,12 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |    |    |    |                        |    |    |    |    |
      * `-----------------------------------------------------------'
      */
-    //[FNLAYER] = KEYMAP_HHKB(
-    //    GRV, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, BSPC,BSPC, \
-    //    ____,____,  UP,____,____,____,____,____,____,PSCR,SLCK,PAUS,INS, DEL,  \
-    //    ____,LEFT,DOWN,RGHT,____,____,LEFT,DOWN,UP,  RGHT,____,____,     PENT, \
-    //    ____,____,____,____,____,SPC, GRV, FN3, ____,____,____,     ____,____, \
-    //    ____,____,____,          ____,                    ____,____,____,____),
+    [FNLAYER] = KEYMAP_HHKB(
+        GRV, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, BSPC,BSPC, \
+        ____,____,  UP,____,____,____,____,____,____,PSCR,SLCK,PAUS,INS, DEL,  \
+        ____,LEFT,DOWN,RGHT,____,____,LEFT,DOWN,UP,  RGHT,____,____,     PENT, \
+        ____,____,____,____,____,SPC, GRV, FN3, ____,____,____,     ____,____, \
+        ____,____,____,          ____,                    ____,____,____,____),
 
     /* Overlay 4: MouseKey
      * ,-----------------------------------------------------------.
@@ -205,7 +205,7 @@ const action_t PROGMEM fn_actions[] = {
 
     [0]  = ACTION_LAYER_TAP_KEY   ( SPACEFN, KC_SPACE), // SPACE LAYER
     [1]  = ACTION_LAYER_MOMENTARY ( MOUSE),             // MOUSE LAYER
-    //[2]  = ACTION_LAYER_MOMENTARY ( FNLAYER),           // FN LAYER
+    [2]  = ACTION_LAYER_MOMENTARY ( FNLAYER),           // FN LAYER
 
     [3]  = ACTION_MODS_KEY        ( MOD_LSFT, KC_GRV),  // tilde
 
